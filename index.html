@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="iACT Portal — Ketamin-assistert psykoterapi og aksept- og forpliktelsesterapi (ACT) programvareplattform">
+  <title>iACT Klinisk Portal — Forberedelse og integrering</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- TOPPTEKST / HEADER -->
+  <header class="app-header">
+    <div class="header-top">
+      <h1 class="app-title">
+        <span class="brand-glyph">⬡</span>
+        iACT Klinisk Portal
+      </h1>
+      <div class="header-actions">
+        <div class="patient-badge">
+          <span class="dot"></span>
+          <span id="patientIdDisplay">Pasient-ID: Ikke angitt</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btnEditPatientId">Angi ID</button>
+      </div>
+    </div>
+    
+    <div class="phase-overview">
+      <div class="phase-indicator active" id="phaseIndicatorPrep">
+        <span class="phase-num">Fase 1</span>
+        <span class="phase-name">Forberedelse (Før dosering)</span>
+      </div>
+      <div class="phase-divider">➔</div>
+      <div class="phase-indicator" id="phaseIndicatorInteg">
+        <span class="phase-num">Fase 2</span>
+        <span class="phase-name">Integrering (24–72t & Vedlikehold)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGASJONSFANER -->
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-tab="tab-intake">
+      <span class="nav-icon">📋</span> Modul 1 & 2: Inntak & Onboarding
+    </button>
+    <button class="nav-tab" data-tab="tab-act-prep">
+      <span class="nav-icon">🌱</span> Modul 3 & 4: Kjerne-ACT & Somatisk
+    </button>
+    <button class="nav-tab" data-tab="tab-integration">
+      <span class="nav-icon">📓</span> Modul 5 & 6: Journal & Defusjon
+    </button>
+    <button class="nav-tab" data-tab="tab-action">
+      <span class="nav-icon">🎯</span> Modul 7 & 8: Handling & DBT-kort
+    </button>
+    <button class="nav-tab" data-tab="tab-monitoring">
+      <span class="nav-icon">📈</span> Modul 9: Oppfølging & Forebygging
+    </button>
+  </nav>
+
+  <!-- HOVEDINNHOLD -->
+  <main class="main-content">
+
+    <!-- ========================================== -->
+    <!-- FANE 1: MODUL 1 & 2 (INNTAK & ONBOARDING) -->
+    <!-- ========================================== -->
+    <section class="tab-panel active" id="tab-intake">
+
+      <!-- MODUL 1: Digitalt medisinsk inntak & psykometrisk batteri -->
+      <div class="card">
+        <div class="card-header-flex">
+          <div>
+            <div class="module-badge">Modul 1 • Før dosering</div>
+            <h2 class="card-title">Digitalt medisinsk inntak & psykometrisk batteri</h2>
+            <p class="card-subtitle">Egenadministrerte kartleggingsskjemaer under klinisk oppfølging.</p>
+          </div>
+        </div>
+
+        <div class="battery-selector">
+          <button class="pill-btn active" data-scale="phq9">PHQ-9 (Depresjon)</button>
+          <button class="pill-btn" data-scale="gad7">GAD-7 (Angst)</button>
+          <button class="pill-btn" data-scale="madrs">MADRS-S (Stemningsleie)</button>
+        </div>
+
+        <div class="scale-container" id="scaleContainer">
+          <!-- Dynamisk generert kartleggingsskjema -->
+        </div>
+
+        <div class="scale-actions">
+          <button class="btn btn-primary" id="btnSubmitScale">Lagre og skår kartlegging</button>
+          <button class="btn btn-secondary" id="btnResetScale">Nullstill valg</button>
+        </div>
+
+        <div class="assessment-result-banner" id="scaleResultBanner" style="display:none;">
+          <div class="result-score-block">
+            <span class="result-number" id="scaleScoreNum">0</span>
+            <span class="result-max" id="scaleScoreMax">/ 27</span>
+          </div>
+          <div class="result-info-block">
+            <div class="result-severity-tag" id="scaleSeverityTag">Mild</div>
+            <div class="result-explanation" id="scaleExplanation">Klinisk utgangspunkt er registrert.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODUL 2: Onboarding & Psykoedukasjon -->
+      <div class="card">
+        <div class="module-badge">Modul 2 • Før dosering</div>
+        <h2 class="card-title">Psykoedukasjonsportal</h2>
+        <p class="card-subtitle">Forstå doseringsforløpet, set & setting, samt prinsipper for nevroplastisk integrering.</p>
+
+        <!-- Underseksjon: Psykoedukasjonsportal -->
+        <div class="sub-section">
+          <h3 class="sub-title">📚 Psykoedukasjon: Behandlingsforløpet</h3>
+          <div class="accordion-group">
+            <details class="edu-accordion" open>
+              <summary>1. Ketaminets nevrobiologi & det plastiske vinduet</summary>
+              <div class="edu-content">
+                <p>Ketamin blokkerer midlertidig NMDA-reseptorer, noe som utløser en rask frigjøring av glutamat og stimulerer BDNF (Brain-Derived Neurotrophic Factor). Dette åpner et 24–72 timers kritisk vindu med økt synaptogenese og nevroplastisitet.</p>
+              </div>
+            </details>
+            <details class="edu-accordion">
+              <summary>2. Prinsipper for "Set & Setting"</summary>
+              <div class="edu-content">
+                <p><strong>Set (Sinntilstand):</strong> Møt opplevelsen med villighet og nysgjerrighet heller enn motstand. Vær åpen for det som dukker opp av kroppsfornemmelser, minner eller indre bilder.</p>
+                <p><strong>Setting (Omgivelser):</strong> Trygge, rolige omgivelser med øyemaske, behagelig leie og tilpasset terapeutisk støtte.</p>
+              </div>
+            </details>
+            <details class="edu-accordion">
+              <summary>3. Navigering av dissosiasjon & radikal aksept</summary>
+              <div class="edu-content">
+                <p>Når vanlige egogrenser mykner opp, kan du oppleve en følelse av å sveve eller miste kroppskontakt. Hvis ubehag eller angst oppstår, bruk ACT-ankeret: <em>"Legg merke til, pust og gi slipp."</em></p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FANE 2: MODUL 3 & 4 (ACT-FORBEREDELSE)    -->
+    <!-- ========================================== -->
+    <section class="tab-panel" id="tab-act-prep">
+
+      <!-- MODUL 3: Kjerne-ACT (Verdier & Hekting av) -->
+      <div class="card">
+        <div class="module-badge">Modul 3 • Før dosering</div>
+        <h2 class="card-title">"Kreativ håpløshet" & Verdikompass</h2>
+        <p class="card-subtitle">Undersøk kostnaden ved emosjonell unngåelse og forankre dine viktigste livsverdier.</p>
+
+        <!-- Underseksjon: Kreativ håpløshet -->
+        <div class="sub-section">
+          <h3 class="sub-title">⚖️ Strategikartlegging: "Kreativ håpløshet"</h3>
+          <p class="section-desc">Hvilke strategier har du brukt for å kontrollere eller fjerne vanskelige tanker og følelser, og hvordan har det fungert på lang sikt?</p>
+          
+          <div class="form-group">
+            <label class="form-label">Unngåelses- eller kontrollstrategi</label>
+            <input type="text" class="form-input" id="strategyInput" placeholder="F.eks. grubling, isolasjon, overdreven distraksjon, undertrykking av følelser">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label class="form-label">Kortsiktig lindring (1–10)</label>
+              <input type="range" class="form-range" id="shortTermEffect" min="1" max="10" value="7">
+              <div class="range-val" id="shortTermEffectVal">7 / 10</div>
+            </div>
+            <div class="form-group col-6">
+              <label class="form-label">Langsiktig kostnad / vitalitetstap (1–10)</label>
+              <input type="range" class="form-range" id="longTermCost" min="1" max="10" value="8">
+              <div class="range-val" id="longTermCostVal">8 / 10</div>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary" id="btnAddStrategy">Legg til i strategioversikten</button>
+
+          <div class="audit-list" id="auditList">
+            <!-- Dynamisk liste over evaluerte strategier -->
+          </div>
+        </div>
+
+        <!-- Underseksjon: Digitalt verdikompass -->
+        <div class="sub-section">
+          <h3 class="sub-title">🧭 Digitalt verdikompass & sesjonsintensjon</h3>
+          <p class="section-desc">Velg og prioriter dine viktigste kjerneverdier som rettesnor for sesjonen.</p>
+          
+          <div class="values-chips-container" id="valuesChipGrid">
+            <!-- Fylles dynamisk fra JS -->
+          </div>
+
+          <div class="form-group" style="margin-top: 1.25rem;">
+            <label class="form-label">Verdiforankret intensjonserklæring for sesjonen</label>
+            <textarea class="form-textarea" id="valuesIntentionText" placeholder="F.eks.: 'I denne sesjonen forplikter jeg meg til å åpne opp for vanskelige følelser slik at jeg kan bygge ekte og trygge relasjoner til mine nærmeste.'"></textarea>
+          </div>
+
+          <button class="btn btn-primary" id="btnSaveValuesCompass">Forankre verdier & intensjon</button>
+        </div>
+      </div>
+
+      <!-- MODUL 4: Somatiske ferdigheter & Krisehåndtering -->
+      <div class="card">
+        <div class="module-badge">Modul 4 • Før dosering</div>
+        <h2 class="card-title">Guidet somatisk pusteøvelse</h2>
+        <p class="card-subtitle">Tren det autonome nervesystemet til å roe seg ned før doseringssesjonen.</p>
+
+        <!-- Interaktiv pusteøvelse -->
+        <div class="breathwork-box">
+          <div class="breath-visualizer" id="breathVisualizer">
+            <div class="breath-circle" id="breathCircle"></div>
+            <div class="breath-text" id="breathInstruction">Trykk Start</div>
+            <div class="breath-subtext" id="breathSubtext">Firkantpusting (4s inn • 4s hold • 4s ut • 4s hold)</div>
+          </div>
+          
+          <div class="btn-group" style="justify-content: center; margin-top: 1rem;">
+            <button class="btn btn-primary" id="btnStartBreath">▶ Start pusteøvelse</button>
+            <button class="btn btn-secondary" id="btnStopBreath" disabled>⏹ Stopp</button>
+          </div>
+        </div>
+
+        <!-- Underseksjon: Å snu sinnet -->
+        <div class="sub-section">
+          <h3 class="sub-title">🔄 Ferdighet: "Å snu sinnet" (Turning the Mind)</h3>
+          <p class="section-desc">Radikal aksept-øvelse: Gjenkjenn veiskillet mellom motstand mot virkeligheten og å velge villig aksept.</p>
+          
+          <div class="fork-road-grid">
+            <div class="road-card rejection">
+              <h4>❌ Motstandens vei (Egenrådighet)</h4>
+              <p>Kjempe mot det som er, kreve at virkeligheten skal være annerledes, noe som fører til fastlåst lidelse og grubling.</p>
+            </div>
+            <div class="road-card acceptance">
+              <h4>✓ Akseptens vei (Villighet)</h4>
+              <p>Anerkjenne virkeligheten akkurat slik den er her og nå, noe som frigjør krefter til verdibaserte handlinger.</p>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;">
+            <label class="form-label">Ubehagelig virkelighet jeg øver på å vende meg mot:</label>
+            <input type="text" class="form-input" id="turningRealityInput" placeholder="F.eks.: 'Jeg kjenner på tristhet og sorg over endringer som har skjedd.'">
+          </div>
+          <button class="btn btn-primary" id="btnSaveTurningMind">Forplikt deg til å snu sinnet</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FANE 3: MODUL 5 & 6 (INTEGRERING & DEFUSJON)  -->
+    <!-- ============================================== -->
+    <section class="tab-panel" id="tab-integration">
+
+      <!-- MODUL 5: Umiddelbar integrering -->
+      <div class="card">
+        <div class="module-badge">Modul 5 • Etter dosering (24–72t)</div>
+        <h2 class="card-title">Digital integreringsjournal</h2>
+        <p class="card-subtitle">Fang opp symboler, emosjonelle skifter og somatisk innsikt mens nevroplastisiteten er forhøyet.</p>
+
+        <div class="form-group">
+          <label class="form-label">1. Somatiske fornemmelser og visuelle temaer</label>
+          <textarea class="form-textarea" id="journalThemes" placeholder="Beskriv indre bilder, fysiske fornemmelser, farger eller opplevelser fra sesjonen..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">2. Psykologisk innsikt og emosjonelle skifter</label>
+          <textarea class="form-textarea" id="journalInsights" placeholder="Hva endret seg i hvordan du forholder deg til din historie, relasjoner eller indre fortellinger?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">3. Konkret integreringshandling for de neste 48 timene</label>
+          <input type="text" class="form-input" id="journalNextSteps" placeholder="Ett lite, konkret skritt for å forankre opplevelsen i hverdagen.">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btnSaveJournal">Lagre journalnotat</button>
+          <button class="btn btn-secondary" id="btnClearJournal">Tøm felter</button>
+        </div>
+
+        <div class="journal-history" id="journalHistoryList">
+          <!-- Lagrede journalnotater -->
+        </div>
+      </div>
+
+      <!-- MODUL 6: Kognitiv defusjon & Nærvær (ACT) -->
+      <div class="card">
+        <div class="module-badge">Modul 6 • Etter dosering (24–72t)</div>
+        <h2 class="card-title">Kognitiv defusjon & Selv-som-kontekst</h2>
+        <p class="card-subtitle">Øv på å hekte deg av klebrige tanker og hvile i det observerende selv.</p>
+
+        <!-- Underseksjon: Blader på en bekk -->
+        <div class="sub-section">
+          <h3 class="sub-title">🍂 Interaktiv øvelse: "Blader på en bekk"</h3>
+          <p class="section-desc">Plasser en krevende tanke på et blad og se det flyte rolig nedover bekken uten å kjempe mot det.</p>
+          
+          <div class="stream-canvas-container" id="streamContainer">
+            <div class="stream-water">
+              <div class="stream-current"></div>
+            </div>
+            <div class="stream-leaves-layer" id="streamLeavesLayer"></div>
+          </div>
+
+          <div class="stream-input-bar">
+            <input type="text" class="form-input" id="streamThoughtInput" placeholder="Skriv inn en tanke (f.eks.: 'Jeg kommer alltid til å være fastlåst')...">
+            <button class="btn btn-primary" id="btnPlaceOnStream">Plasser på blad 🍂</button>
+          </div>
+        </div>
+
+        <!-- Underseksjon: Selv-som-kontekst -->
+        <div class="sub-section">
+          <h3 class="sub-title">⛅ Selv-som-kontekst: Himmelen og været</h3>
+          <div class="metaphor-card">
+            <p><em>"Du er ikke stormen, regnet eller de mørke skyene. Du er den vidstrakte himmelen som rommer alt været. Været forandrer seg hele tiden, men himmelen blir aldri skadet av sitt eget vær."</em></p>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;">
+            <label class="form-label">Observerende selv-undersøkelse: "Akkurat nå legger jeg merke til at jeg har tanken/følelsen om..."</label>
+            <input type="text" class="form-input" id="selfContextInput" placeholder="Skriv inn det du observerer i deg selv...">
+          </div>
+          <button class="btn btn-secondary" id="btnSaveSelfContext">Loggfør observasjon</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FANE 4: MODUL 7 & 8 (HANDLING & DBT-KORT)     -->
+    <!-- ============================================== -->
+    <section class="tab-panel" id="tab-action">
+      
+      <!-- MODUL 7: Verdibasert handling & Målsporing -->
+      <div class="card">
+        <div class="module-badge">Modul 7 • Etter dosering</div>
+        <h2 class="card-title">Verdibasert handlingsplan & SMART-mål</h2>
+        <p class="card-subtitle">Gjør om det nevroplastiske momentumet til konkrete, verdibaserte handlinger.</p>
+
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label class="form-label">Kjerneverdi</label>
+            <select class="form-select" id="goalValueSelect">
+              <option value="Relasjoner">💛 Relasjoner & Nærhet</option>
+              <option value="Vekst">🌱 Personlig vekst & Mot</option>
+              <option value="Vitalitet">⚡ Fysisk & Psykisk vitalitet</option>
+              <option value="Mening">🧭 Mening, Arbeid & Bidrag</option>
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label class="form-label">Hyppighet</label>
+            <select class="form-select" id="goalFrequency">
+              <option value="Daglig">Daglig</option>
+              <option value="3 ganger i uken">3 ganger i uken</option>
+              <option value="Ukentlig">Ukentlig</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">SMART-handlingsbeskrivelse</label>
+          <input type="text" class="form-input" id="goalDescription" placeholder="F.eks.: 'Gå en 20-minutters oppmerksom tur i naturen uten mobil eller musikk.'">
+        </div>
+
+        <button class="btn btn-primary" id="btnAddGoal">Legg til forpliktet handling</button>
+
+        <div class="goals-grid" id="goalsList">
+          <!-- Dynamisk liste over mål -->
+        </div>
+      </div>
+
+      <!-- MODUL 8: DBT-dagbokkort & Atferdseksperimenter -->
+      <div class="card">
+        <div class="module-badge">Modul 8 • Daglig klinisk verktøy</div>
+        <h2 class="card-title">DBT-dagbokkort & Atferdseksperimenter</h2>
+        <p class="card-subtitle">Loggfør daglig ferdighetsbruk, følelsesregulering og resultater av hjemmeoppgaver.</p>
+
+        <div class="form-row">
+          <div class="form-group col-4">
+            <label class="form-label">Generelt humør (1–10)</label>
+            <input type="range" class="form-range" id="dbtMood" min="1" max="10" value="6">
+            <div class="range-val" id="dbtMoodVal">6 / 10</div>
+          </div>
+          <div class="form-group col-4">
+            <label class="form-label">Trang til unngåelse (1–10)</label>
+            <input type="range" class="form-range" id="dbtUrge" min="1" max="10" value="4">
+            <div class="range-val" id="dbtUrgeVal">4 / 10</div>
+          </div>
+          <div class="form-group col-4">
+            <label class="form-label">Samsvar med verdier (1–10)</label>
+            <input type="range" class="form-range" id="dbtAlignment" min="1" max="10" value="7">
+            <div class="range-val" id="dbtAlignmentVal">7 / 10</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">DBT- og ACT-ferdigheter brukt i dag</label>
+          <div class="skills-checkbox-grid">
+            <label class="check-pill"><input type="checkbox" value="TIPP-ferdighet (Somatisk)"> TIPP (Temperatur, Intens trening, Pust, Muskelavspenning)</label>
+            <label class="check-pill"><input type="checkbox" value="Radikal aksept"> Radikal aksept</label>
+            <label class="check-pill"><input type="checkbox" value="Defusjon / Avhekting"> Defusjon / Avhekting</label>
+            <label class="check-pill"><input type="checkbox" value="Nærvær i følelser"> Nærvær i følelser</label>
+            <label class="check-pill"><input type="checkbox" value="Motsatt handling"> Motsatt handling</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Notater fra atferdseksperimenter & observasjoner</label>
+          <textarea class="form-textarea" id="dbtNotes" placeholder="Hvilke atferdseksperimenter utførte du? Hva oppdaget du?"></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="btnSaveDbtCard">Lagre dagens dagbokkort</button>
+
+        <div class="diary-history" id="dbtHistoryList">
+          <!-- Lagrede dagbokkort -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FANE 5: MODUL 9 (OPPFØLGING & FOREBYGGING)    -->
+    <!-- ============================================== -->
+    <section class="tab-panel" id="tab-monitoring">
+
+      <!-- MODUL 9: Langtidsmåling & Oppfølging -->
+      <div class="card">
+        <div class="module-badge">Modul 9 • Langtidsoppfølging</div>
+        <h2 class="card-title">Psykometrisk sporing & Fleksibilitetstrender</h2>
+        <p class="card-subtitle">Visuell oppfølging av depresjon, angst og psykologisk fleksibilitet over tid.</p>
+
+        <!-- Acceptance and Action Questionnaire (AAQ-2) -->
+        <div class="sub-section">
+          <h3 class="sub-title">📋 Acceptance and Action Questionnaire (AAQ-2)</h3>
+          <p class="section-desc">7-spørsmåls standardmål for psykologisk fleksibilitet (lavere skår = høyere fleksibilitet).</p>
+          <div id="aaq2Container">
+            <!-- Dynamisk 7 spørsmål -->
+          </div>
+          <button class="btn btn-primary" id="btnScoreAaq2">Beregn og lagre AAQ-2</button>
+        </div>
+
+        <!-- Visuelt analysedashboard -->
+        <div class="sub-section">
+          <h3 class="sub-title">📊 Forløpsoversikt</h3>
+          <div class="metrics-summary-grid" id="metricsSummaryGrid">
+            <div class="metric-card">
+              <div class="metric-label">Siste PHQ-9</div>
+              <div class="metric-val" id="metricPhq9">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Siste GAD-7</div>
+              <div class="metric-val" id="metricGad7">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Siste AAQ-2</div>
+              <div class="metric-val" id="metricAaq2">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Dagboknotater</div>
+              <div class="metric-val" id="metricDiaryCount">0</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tilbakefallsforebygging & Triggeroversikt -->
+      <div class="card">
+        <div class="module-badge">Modul 9 • Tilbakefallsforebygging</div>
+        <h2 class="card-title">Tilbakefallsforebygging & Personlig triggermodell</h2>
+        <p class="card-subtitle">Identifiser personlige tidlige varseltegn og utarbeid en konkret tiltaksplan.</p>
+
+        <div class="form-group">
+          <label class="form-label">⚠️ Tidlige varseltegn (Subtile atferdsendringer på at ting sklir ut)</label>
+          <textarea class="form-textarea" id="relapseWarningSigns" placeholder="F.eks.: Avlyser sosiale avtaler, dropper morgenrutiner, mer skjermtid, urolig søvn..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">🛡️ Akutt tiltaksplan (Trinn for trinn)</label>
+          <textarea class="form-textarea" id="relapseActionPlan" placeholder="F.eks.: 1. Gjennomfør 10 min firkantpusting. 2. Ta kontakt med behandler. 3. Gå en tur i henhold til verdiavtalen."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">📞 Nød- og støttekontakter</label>
+          <input type="text" class="form-input" id="relapseContacts" placeholder="Behandler, kontaktperson, legevakt / hjelpenumre">
+        </div>
+
+        <button class="btn btn-primary" id="btnSaveRelapsePlan">Lagre tiltaksplan</button>
+      </div>
+
+      <!-- Klinisk dataeksport -->
+      <div class="card">
+        <div class="module-badge">Klinisk motor</div>
+        <h2 class="card-title">Dataeksport & Sikkerhetskopi</h2>
+        <p class="card-subtitle">Eksporter tidsstemplede data for gjennomgang med behandler eller forskningsformål.</p>
+
+        <div class="export-card">
+          <div class="export-icon">📦</div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
+            Alle kartlegginger, journalnotater, dagbokkort og verdiprofiler klargjort for eksport.
+          </p>
+          <div class="btn-group" style="justify-content: center;">
+            <button class="btn btn-primary" id="btnExportJson">📄 Last ned JSON-fil</button>
+            <button class="btn btn-secondary" id="btnExportCsv">📊 Last ned CSV-regneark</button>
+            <button class="btn btn-danger btn-sm" id="btnClearAllData">🗑️ Nullstill lokale data</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PASIENT-ID MODAL -->
+  <dialog class="modal" id="patientModal">
+    <div class="modal-content">
+      <h3 class="modal-title">Angi pasientidentifikator</h3>
+      <p class="modal-desc">Skriv inn en anonym pasient-ID for å merke lokale kliniske oppføringer.</p>
+      <input type="text" class="form-input" id="modalPatientInput" placeholder="F.eks. PAS-8821">
+      <div class="btn-group" style="margin-top: 1rem; justify-content: flex-end;">
+        <button class="btn btn-secondary" id="btnCancelModal">Avbryt</button>
+        <button class="btn btn-primary" id="btnConfirmPatientId">Lagre ID</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- VARSLINGER / TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
