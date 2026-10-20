@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="nb-NO" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Behandling for psykiske med fysiske symptomer | EmmaSofia</title>
+  <meta name="description"
+    content="Spesialisert behandling ved EmmaSofia for sammensatte tilstander hvor psykiske utfordringer og fysiske symptomer opptrer sammen. Helsepsykologi og helhetlig oppfølging i Oslo, Bergen og online.">
+  <meta property="og:locale" content="nb_NO">
+  <meta property="og:site_name" content="EmmaSofia - Behandling tilpasset deg">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Behandling for psykiske med fysiske symptomer | EmmaSofia">
+  <meta property="og:description"
+    content="Når kropp og sinn henger sammen: Spesialisert helsepsykologisk tilnærming hos EmmaSofia under menypunktet Utfordring.">
+  <meta property="og:image" content="https://emmasofia.no/app/uploads/2024/11/Emma_Sofia_Oktober_0177-scaled.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            es: {
+              main: '#14111f',
+              secondary: '#48484d',
+              tertiary: '#f4f2f1',
+              primary: '#af9989',
+              primaryAccent: '#e4c7b8',
+              mainAccent: '#a5897d',
+              buttonPurple: '#5b4a68',
+              buttonPurpleHover: '#493a54',
+              base: '#ffffff',
+            }
+          },
+          fontFamily: {
+            sans: ['"Mona Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Mona Sans Font (Exact EmmaSofia Typography) & FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @font-face {
+      font-family: "Mona Sans";
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('https://emmasofia.no/app/themes/ollie/assets/fonts/Mona-Sans.woff2') format('woff2');
+      font-stretch: 75% 125%;
+    }
+
+    :root {
+      --wp--preset--color--primary: #af9989;
+      --wp--preset--color--main: #14111f;
+      --wp--preset--color--secondary: #48484d;
+      --wp--preset--color--main-accent: #a5897d;
+      --wp--preset--color--primary-accent: #e4c7b8;
+      --wp--preset--color--tertiary: #f4f2f1;
+      --wp--preset--color--base: #ffffff;
+
+      /* Exact EmmaSofia Fluid Typography Scales */
+      --wp--preset--font-size--x-small: clamp(.825rem, 0.825rem + ((1vw - 0.2rem) * 0.213), .95rem);
+      --wp--preset--font-size--small: clamp(.9rem, 0.9rem + ((1vw - 0.2rem) * 0.255), 1.05rem);
+      --wp--preset--font-size--base: clamp(1rem, 1rem + ((1vw - 0.2rem) * 0.281), 1.165rem);
+      --wp--preset--font-size--medium: clamp(1.414rem, 1.414rem + ((1vw - 0.2rem) * 0.402), 1.65rem);
+      --wp--preset--font-size--large: clamp(1.999rem, 1.999rem + ((1vw - 0.2rem) * 1.278), 2.75rem);
+      --wp--preset--font-size--x-large: clamp(2.827rem, 2.827rem + ((1vw - 0.2rem) * 1.146), 3.5rem);
+    }
+
+    body {
+      font-family: "Mona Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: var(--wp--preset--font-size--base);
+      font-weight: 430;
+      color: #14111f;
+      background-color: #f4f2f1;
+      line-height: 1.55;
+    }
+
+    /* EmmaSofia Authentic Heading & Content Typography */
+    .es-h1 {
+      font-size: var(--wp--preset--font-size--x-large) !important;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    .es-h2 {
+      font-size: var(--wp--preset--font-size--large) !important;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .es-h3 {
+      font-size: var(--wp--preset--font-size--medium) !important;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .es-lead-p {
+      font-size: var(--wp--preset--font-size--base) !important;
+      line-height: 1.6;
+    }
+
+    .es-content-flow p,
+    .es-content-flow li {
+      font-size: var(--wp--preset--font-size--base);
+      line-height: 1.625;
+    }
+
+    .es-dotted-separator {
+      width: 100%;
+      height: 1px;
+      border: none;
+      background: repeating-linear-gradient(90deg, #a5897d, #a5897d 2px, transparent 2px, transparent 5px);
+    }
+
+    .no-bullets {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body class="bg-es-tertiary text-es-main antialiased selection:bg-es-primaryAccent selection:text-es-main">
+
+  <!-- Interactive Modal Dialog -->
+  <div id="custom-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs hidden p-4">
+    <div class="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl border border-stone-200 text-center">
+      <div
+        class="w-12 h-12 rounded-full bg-es-primaryAccent/40 text-es-buttonPurple flex items-center justify-center text-xl mb-4 mx-auto">
+        <i class="fa-solid fa-heart-pulse"></i>
+      </div>
+      <h3 id="modal-title" class="text-xl font-semibold text-es-main mb-2"></h3>
+      <p id="modal-message" class="text-es-secondary text-sm mb-6"></p>
+      <button onclick="closeModal()"
+        class="w-full bg-es-buttonPurple hover:bg-es-buttonPurpleHover text-white font-medium py-3 px-6 rounded-md transition duration-150">
+        Forstått
+      </button>
+    </div>
+  </div>
+
+  <!-- Header: Exact EmmaSofia Style with Champagne Pink Background -->
+  <header class="sticky top-0 z-40 bg-es-primaryAccent border-b border-es-mainAccent/20 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="https://emmasofia.no/" class="flex items-center" rel="home">
+        <img width="228" height="48"
+          src="https://emmasofia.no/app/uploads/2023/12/KlinikkENE-Logo-Left-Dark-Grey-on-Transparent.png"
+          class="h-10 w-auto object-contain" alt="EmmaSofia" />
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-es-main">
+
+        <!-- Menu item: Utfordring (Active Dropdown) -->
+        <div class="relative group">
+          <button
+            class="flex items-center gap-1.5 py-2 font-semibold text-es-main border-b-2 border-es-main hover:opacity-80 transition focus:outline-none">
+            <span>Utfordring</span>
+            <i class="fa-solid fa-chevron-down text-[10px] text-es-main transition group-hover:rotate-180"></i>
+          </button>
+
+          <!-- Dropdown Submenu -->
+          <div
+            class="absolute left-0 top-full pt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-150 z-50">
+            <div
+              class="bg-es-primaryAccent rounded-md shadow-xl border border-es-mainAccent/30 p-2 space-y-0.5 text-xs text-es-main">
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">ADHD</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Depresjon</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Traumer/PTSD</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Angst</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Sosial angst</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Autisme/Aspergers</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Spiseforstyrrelser</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Palliasjon</a>
+
+              <!-- Active Submenu Item -->
+              <div class="pt-1 mt-1 border-t border-es-mainAccent/20">
+                <a href="#"
+                  class="flex items-center justify-between px-3 py-2 rounded font-semibold bg-white/70 text-es-main shadow-xs">
+                  <span>Psykiske med fysiske symptomer</span>
+                  <span class="w-2 h-2 rounded-full bg-es-buttonPurple"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu item: Behandling with Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center gap-1.5 py-2 hover:opacity-80 transition focus:outline-none">
+            <span>Behandling</span>
+            <i class="fa-solid fa-chevron-down text-[10px] text-es-main transition group-hover:rotate-180"></i>
+          </button>
+          <div
+            class="absolute left-0 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+            <div
+              class="bg-es-primaryAccent rounded-md shadow-xl border border-es-mainAccent/30 p-2 space-y-0.5 text-xs text-es-main">
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Psykolog</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Psykiater</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Medisinassistert psykoterapi</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">ADHD behandling</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">ADHD-grupper</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Parterapi</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu item: Info with Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center gap-1.5 py-2 hover:opacity-80 transition focus:outline-none">
+            <span>Info</span>
+            <i class="fa-solid fa-chevron-down text-[10px] text-es-main transition group-hover:rotate-180"></i>
+          </button>
+          <div
+            class="absolute left-0 top-full pt-2 w-60 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+            <div
+              class="bg-es-primaryAccent rounded-md shadow-xl border border-es-mainAccent/30 p-2 space-y-0.5 text-xs text-es-main">
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Om oss</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Behandlere</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Priser og betingelser</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Lokasjoner (Oslo, Bergen,
+                Fredrikstad, Online)</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">Finansiering</a>
+              <a href="#" class="block px-3 py-2 rounded hover:bg-black/5 transition">For helsepersonell</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="hover:opacity-80 transition py-2">Kontakt</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://emmasofia.no/bestill-time/"
+          onclick="event.preventDefault(); openModal('Bestill time', 'For å bestille time eller innledende samtale, kan du benytte vår timebestilling eller kontakte oss på telefon 922 93 108.')"
+          class="bg-es-buttonPurple hover:bg-es-buttonPurpleHover text-white text-xs font-medium px-4 py-2.5 rounded-md transition shadow-xs">
+          Bestill time
+        </a>
+        <a href="https://system.easypractice.net/book/emmasofia-klinikk/center" target="_blank"
+          rel="noreferrer noopener"
+          class="bg-es-mainAccent hover:bg-es-mainAccent/90 text-white text-xs font-medium px-3.5 py-2.5 rounded-md transition">
+          Logg inn
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="lg:hidden text-es-main p-2 focus:outline-none" aria-label="Åpne meny">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu"
+      class="hidden lg:hidden bg-es-primaryAccent border-t border-es-mainAccent/20 px-6 py-4 space-y-3">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-wider text-es-secondary block mb-1">Utfordring</span>
+        <div class="space-y-1 pl-2">
+          <a href="#" class="block text-xs py-1">ADHD</a>
+          <a href="#" class="block text-xs py-1">Depresjon</a>
+          <a href="#" class="block text-xs py-1">Traumer / PTSD</a>
+          <a href="#" class="block text-xs py-1">Angst</a>
+          <a href="#"
+            class="block text-xs py-1 font-semibold text-es-buttonPurple bg-white/60 px-2 py-1.5 rounded">Psykiske med
+            fysiske symptomer (aktiv)</a>
+        </div>
+      </div>
+      <a href="#" class="block text-sm font-medium py-1">Behandling</a>
+      <a href="#" class="block text-sm font-medium py-1">Info</a>
+      <a href="#" class="block text-sm font-medium py-1">Kontakt</a>
+      <div class="pt-2 flex flex-col gap-2">
+        <button onclick="openModal('Bestill time', 'For å bestille time, ring 922 93 108 eller bruk online booking.')"
+          class="w-full bg-es-buttonPurple text-white py-2.5 rounded-md text-xs font-medium">Bestill time</button>
+        <button onclick="openModal('Innlogging', 'Omdirigerer til pasientportal.')"
+          class="w-full bg-es-mainAccent text-white py-2.5 rounded-md text-xs font-medium">Logg inn</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Cover Banner: Exact EmmaSofia Utfordring Cover Style -->
+    <section class="relative w-full h-[400px] md:h-[460px] flex items-center justify-center overflow-hidden bg-es-main">
+      <img src="https://emmasofia.no/app/uploads/2024/11/Emma_Sofia_Oktober_0177-scaled.jpg"
+        alt="Behandling hos EmmaSofia"
+        class="absolute inset-0 w-full h-full object-cover object-center brightness-60" />
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+        <h1 class="es-h1 text-white max-w-3xl mx-auto leading-tight">
+          Behandling for psykiske med fysiske symptomer
+        </h1>
+      </div>
+    </section>
+
+    <!-- 2. Main Content Group: Exact EmmaSofia Ollie Theme Layout (has-tertiary-background-color) -->
+    <section class="py-12 md:py-16 bg-es-tertiary">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header group -->
+        <div class="text-center mb-10">
+          <p class="text-sm md:text-base font-medium text-es-main mb-2">EmmaSofia-klinikkene tilbyr</p>
+          <h2 class="es-h2 text-es-primary mb-5">
+            Helhetlig behandling for psykiske utfordringer med fysiske symptomer
+          </h2>
+          <p class="es-lead-p text-es-secondary leading-relaxed">
+            Merker du fysiske symptomer i relasjon til livsutfordringer, eller tærer fysisk sykdom på den mentale helsen
+            din? Mange slike utfordringer innebærer et komplekst samspill mellom kropp og sinn, der behandlinger ikke
+            kan gjøres isolert fra hverandre. Hos EmmaSofia er vi i en unik posisjon til å tilby helhetlige og
+            evidensbaserte metoder basert på de nyeste fremskrittene innen feltet, der kropp og sinn behandles som en
+            helhet.
+          </p>
+        </div>
+
+        <!-- Editorial Content: Clean Gutenberg Block Flow directly on background with authentic EmmaSofia typography -->
+        <div class="space-y-8 text-es-secondary es-content-flow">
+
+          <div>
+            <h3 class="es-h3 text-es-primary mb-3">
+              Utfordringer som involverer både kropp og sinn
+            </h3>
+            <p class="mb-4">
+              Kropp og sinn henger tett sammen. For eksempel kan stress og bekymring føre til anspente skuldre og
+              muskelspenninger, som igjen gjør deg mer urolig og irritabel. Selv om dette samspillet i
+              virkeligheten er komplekst og potensielt sirkulært, er det helt naturlig å oppleve det i kun én retning:
+            </p>
+            <ul class="list-disc my-4 italic" style="list-style-type: none; margin: 1rem 0; padding-left: 30px;">
+              <li>«Psykologisk stress ødelegger nattesøvnen min»</li>
+              <li>«Angst forverrer IBS-symptomene mine»</li>
+              <li>«Kroniske smerter gjør meg deprimert»</li>
+            </ul>
+            <p class="mb-4">
+              Sammen med en kvalifisert behandler kan dere utforske de fysiske og psykologiske symptomene og
+              identifisere de underliggende utfordringene mellom kropp og sinn, det som på fagspråket kalles
+              somatisk-psykologiske komorbiditeter.
+            </p>
+            <p class="mb-4">Noen eksempler på utfordringer mellom kropp og sinn er:</p>
+            <ul class="space-y-2 list-disc pl-5 mb-6">
+              <li>Søvnløshet og depresjon</li>
+              <li>Kroniske smerter og PTSD</li>
+              <li>Migrene og stress</li>
+              <li>Diabetes og ADHD</li>
+              <li>Astma og angst</li>
+            </ul>
+            <p class="mb-4">En annen vanlig kategori av slike utfordringer er psykologiske
+              utfordringer ved medisinsk behandling og somatisk sykdom, slik som:</p>
+            <ul class="space-y-2 list-disc pl-5">
+              <li>Under fysioterapi og rehabilitering</li>
+              <li>Etter kirurgi</li>
+              <li>Ved kreftdiagnose</li>
+              <li>I palliativ omsorg</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="es-h3 text-es-primary mb-3">
+              Vår helhetlige utredning og behandling
+            </h3>
+            <p class="mb-4">
+              EmmaSofia følger den nyeste utviklingen innen klinisk helsepsykologi, en voksende spesialitet i Norge som
+              er dedikert til å forstå og behandle de dype sammenhengene mellom kropp og sinn.
+            </p>
+            <p class="mb-4">
+              Vår helhetlige utredning er bygget på den biopsykososiale modellen. Utover standard psykologiske
+              undersøkelser ser vi nøye på hvordan biologiske, psykologiske og sosiale faktorer samspiller i livet ditt.
+            </p>
+            <p class="mb-4">
+              Når det gjelder helhetlig behandling, er tilnærmingen vår både tilpasset og omfattende for å håndtere de
+              flere tilstandene som er involvert. Om nødvendig henter vi fra et spekter av banebrytende, evidensbaserte
+              metoder som er spesialisert for å behandle psykiske tilstander som opptrer samtidig med din spesifikke
+              fysiske tilstand. Hvis vi for eksempel identifiserer migrene som en vesentlig faktor i din sak, følger vi
+              etablerte prosedyrer som har vist seg effektive i å behandle de psykiske tilstandene som ofte ledsager
+              migrene.
+            </p>
+            <p class="mb-4">
+              Hvis vi finner at depresjon er din hovedutfordring, og du tidligere har forsøkt samtaleterapi og
+              antidepressive medisiner uten tilstrekkelig effekt, kan medisinassistert psykoterapi vurderes i behandling
+              mot depresjon.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="es-h3 text-es-primary mb-3">
+              Medisinassistert psykoterapi
+            </h3>
+            <p class="mb-4">
+              Medisinassistert psykoterapi innebærer at samtaleterapi brukes i kombinasjon med medisiner. I
+              medisinassistert psykoterapi brukes ikke medisiner daglig. Medisin brukes kun et fåtalls ganger for å
+              forøke effekten av psykoterapi. Medisinene kan bidra til nevroplastisitet eller å øke bearbeiding av
+              følelser og utbytte av psykoterapi.
+            </p>
+
+            <p class="mb-4">
+              Medisinassistert psykoterapi kan vurderes for deg som har behandlingsresistent depresjon og angst, og som
+              ikke har hatt tilstrekkelig effekt av samtaleterapi og antidepressive medisiner. Fastlåste tankemønstre
+              kan brytes lettere, og man kan få mindre påtrengende negative tanker. Motivasjonen til endring kan øke, og
+              man kan få mer overskudd og energi.
+            </p>
+
+            <p class="mb-4">
+              Behandlingsprosessen kan bidra til å skape positive forbindelser i hjernen og gi varige endringer i
+              tanker,
+              følelser og atferd
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Testimonial Quote Banner: Exact Dark Grey Background with Champagne Text -->
+    <section class="py-14 bg-es-secondary text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-es-primaryAccent mb-4 leading-snug">
+          «Hos EmmaSofia ble jeg endelig møtt som et helt menneske – ikke bare som en diagnose eller et fysisk symptom.»
+        </h2>
+        <p class="text-sm sm:text-base text-stone-200 max-w-2xl mx-auto leading-relaxed mb-6 font-normal">
+          – Jeg hadde gått i årevis mellom ulike spesialister uten at noen så sammenhengen mellom de kroniske smertene
+          og den mentale utmattelsen. Hos EmmaSofia fant vi sammenhengen, og for første gang på lenge opplevde jeg varig
+          fremgang og håp.
+        </p>
+        <p class="text-sm font-semibold text-white">Pasient ved EmmaSofia</p>
+      </div>
+    </section>
+
+    <!-- 5. Anbefalt behandlingsforløp: Exact 2-Column with Step Circles (1, 2, 3) -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-es-primary text-center mb-16">
+          Vårt anbefalte behandlingsforløp for psykiske med fysiske symptomer
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <!-- Left Column: Image -->
+          <div>
+            <div class="rounded-xl overflow-hidden shadow-sm">
+              <img src="https://emmasofia.no/app/uploads/2024/02/Angst-1.jpg" alt="Behandlingsforløp hos EmmaSofia"
+                class="w-full h-auto object-cover rounded-xl" />
+            </div>
+            <p class="text-xs text-stone-500 text-center mt-3">Behandlingsforløpet skreddersys alltid ut fra dine
+              individuelle behov og målsettinger.</p>
+          </div>
+
+          <!-- Right Column: Steps with Number Circles -->
+          <div class="space-y-8">
+
+            <!-- Step 1 -->
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-full bg-es-primary text-white flex items-center justify-center font-bold text-sm shrink-0 mt-1">
+                1
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-es-main mb-1">Oppstart</h4>
+                <p class="text-sm text-es-secondary leading-relaxed">
+                  I en grundig oppstartsamtale (80 min) kartlegger du og psykologen både den somatiske historikken og de
+                  psykologiske belastningene. Sammen setter vi tydelige mål for videre oppfølging.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-full bg-es-primary text-white flex items-center justify-center font-bold text-sm shrink-0 mt-1">
+                2
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-es-main mb-1">Behandling og tilrettelegging</h4>
+                <p class="text-sm text-es-secondary leading-relaxed mb-2">
+                  <strong>Psykologbehandling (45 min):</strong> Individuelle helsepsykologiske samtaler med fokus på
+                  kognitiv regulering, eksponering og symptomforståelse.
+                </p>
+                <p class="text-sm text-es-secondary leading-relaxed">
+                  <strong>Medisinassistert psykoterapi (120 min):</strong> Dersom tilstanden er behandlingsresistent,
+                  vurderer lege og psykolog om ketaminassistert terapi er riktig for deg.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-full bg-es-primary text-white flex items-center justify-center font-bold text-sm shrink-0 mt-1">
+                3
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-es-main mb-1">Vedlikehold og langtidsoppfølging</h4>
+                <p class="text-sm text-es-secondary leading-relaxed">
+                  Evaluering av bedring og vedlikeholdssamtaler for å sikre at de gode vanene og mestringsstrategiene
+                  forblir integrert i hverdagen. Vi følger deg opp over tid for å forebygge tilbakefall.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Feature Booking Boxes: Exact "For deg som vil komme i gang" on Warm Taupe (#a5897d) -->
+    <section class="py-16 md:py-20 bg-es-mainAccent text-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <p class="text-sm font-medium text-es-tertiary mb-2">For deg som vil komme i gang</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">
+            Velg innledende samtale eller oppstartstime
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Card 1 -->
+          <div class="bg-white text-es-main rounded-xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="rounded-lg overflow-hidden mb-5 h-44">
+                <img src="https://emmasofia.no/app/uploads/2024/02/Skjermbilde-2024-02-28-kl.-09.19.43.png"
+                  alt="Innledende telefonsamtale" class="w-full h-full object-cover" />
+              </div>
+              <h3 class="text-lg font-bold text-es-mainAccent mb-2">Innledende telefonsamtale</h3>
+              <p class="text-xs sm:text-sm text-es-secondary mb-4 leading-relaxed">
+                Finn ut om EmmaSofia-klinikkene og vår helsepsykologiske tilnærming er aktuell for deg.
+              </p>
+              <p class="text-lg font-bold text-es-main mb-6">Gratis</p>
+            </div>
+            <div>
+              <div class="es-dotted-separator mb-4"></div>
+              <div class="text-right">
+                <button
+                  onclick="openModal('Innledende telefonsamtale', 'Du kan sette opp en uforpliktende gratis telefonsamtale via vår online timebestilling.')"
+                  class="border-2 border-es-mainAccent text-es-mainAccent hover:bg-es-mainAccent hover:text-white px-5 py-2 rounded-md text-xs font-semibold transition">
+                  Velg
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white text-es-main rounded-xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="rounded-lg overflow-hidden mb-5 h-44">
+                <img src="https://emmasofia.no/app/uploads/2024/02/Depresjon-1024x683.jpg" alt="Oppstartsamtale"
+                  class="w-full h-full object-cover" />
+              </div>
+              <h3 class="text-lg font-bold text-es-mainAccent mb-2">Oppstartsamtale (80 min)</h3>
+              <p class="text-xs sm:text-sm text-es-secondary mb-4 leading-relaxed">
+                Grundig gjennomgang av somatisk og psykologisk helse, kartlegging og behandlingsplan.
+              </p>
+              <p class="text-lg font-bold text-es-main mb-6">2 900,-</p>
+            </div>
+            <div>
+              <div class="es-dotted-separator mb-4"></div>
+              <div class="text-right">
+                <button
+                  onclick="openModal('Oppstartsamtale 80 min', 'Bestill din oppstartsamtale med psykolog i Oslo, Bergen, Fredrikstad eller online.')"
+                  class="border-2 border-es-mainAccent text-es-mainAccent hover:bg-es-mainAccent hover:text-white px-5 py-2 rounded-md text-xs font-semibold transition">
+                  Velg
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white text-es-main rounded-xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="rounded-lg overflow-hidden mb-5 h-44">
+                <img src="https://emmasofia.no/app/uploads/2024/02/Avhenghet-1024x683.jpg" alt="Psykologsamtale"
+                  class="w-full h-full object-cover" />
+              </div>
+              <h3 class="text-lg font-bold text-es-mainAccent mb-2">Psykologsamtale (45 min)</h3>
+              <p class="text-xs sm:text-sm text-es-secondary mb-4 leading-relaxed">
+                Individuell samtale med erfaren psykolog for oppfølging, verktøy og mestring.
+              </p>
+              <p class="text-lg font-bold text-es-main mb-6">1 890,-</p>
+            </div>
+            <div>
+              <div class="es-dotted-separator mb-4"></div>
+              <div class="text-right">
+                <button
+                  onclick="openModal('Psykologsamtale 45 min', 'Velg psykologsamtale på en av våre klinikker eller over video.')"
+                  class="border-2 border-es-mainAccent text-es-mainAccent hover:bg-es-mainAccent hover:text-white px-5 py-2 rounded-md text-xs font-semibold transition">
+                  Velg
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FAQ Accordion Section: Exact EmmaSofia FAQ -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-es-main text-center mb-12">
+          Ofte stilte spørsmål
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- FAQ 1 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hva innebærer helsepsykologi hos EmmaSofia?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Helsepsykologi fokuserer på hvordan biologiske, psykologiske og sosiale faktorer påvirker fysisk helse og
+              sykdom. Vi hjelper deg med å håndtere kronisk smerte, sykdomsbelastning og fatigue gjennom evidensbaserte
+              metoder.
+            </p>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hvordan henger fysiske symptomer og psykisk helse sammen?
+            </h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Kropp og sinn kommuniserer kontinuerlig via nervesystemet og hormonsystemet. Langvarig smerte eller stress
+              kan forsterke smerteopplevelsen, skape søvnforstyrrelser og føre til angst eller depresjon.
+            </p>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Kan jeg få behandling digitalt over video?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Ja, EmmaSofia tilbyr trygge og effektive videosamtaler over hele landet. Dette er spesielt gunstig dersom
+              fysiske plager eller fatigue gjør reising krevende.
+            </p>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hvem passer behandlingen for?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Behandlingen passer for alle som opplever at fysiske symptomer, kroniske smerter eller somatisk sykdom
+              påvirker humør, energi, søvn og livskvalitet.
+            </p>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hva er ketaminassistert psykoterapi?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Medisinassistert psykoterapi kombinerer samtaleterapi med medisinsk administrert ketamin under trygg
+              oppfølging av lege og psykolog. Det kan vurderes for personer med langvarig depresjon som opptrer sammen
+              med fysiske plager og smerter, og som ikke har hatt tilstrekkelig utbytte av annen behandling.
+            </p>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hvordan kan psykolog hjelpe ved kirurgi eller under
+              rehabilitering?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Våre psykologer hjelper med å bearbeide post-operative reaksjoner, håndtere smertefrykt ved opptrening,
+              samt støtte pasienter og pårørende ved kreftdiagnose eller i palliativ fase.
+            </p>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hvordan fungerer de digitale egenvurderingsverktøyene?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Du kan ta gratis og anonyme tester på nett for spesifikke plager – inkludert <a
+                href="https://sovntest.no/" target="_blank" class="underline text-es-primary">Sovntest.no</a>, <a
+                href="https://fibromyalgitest.no/" target="_blank"
+                class="underline text-es-primary">Fibromyalgitest.no</a>, <a href="https://utmattelsetest.no/"
+                target="_blank" class="underline text-es-primary">Utmattelsetest.no</a>, <a href="https://ibstest.no/"
+                target="_blank" class="underline text-es-primary">IBStest.no</a> og <a href="https://migrenetest.no/"
+                target="_blank" class="underline text-es-primary">Migrenetest.no</a>, samt <a
+                href="https://depresjontest.no/" target="_blank" class="underline text-es-primary">Depresjontest.no</a>
+              og <a href="https://angsttest.no/" target="_blank" class="underline text-es-primary">Angsttest.no</a>.
+              Dette gir deg og behandleren en verdifull indikasjon på symptomtrykket før første time.
+            </p>
+          </div>
+
+          <!-- FAQ 8 -->
+          <div class="border border-stone-200 rounded-lg p-5">
+            <h3 class="text-sm font-bold text-es-main mb-2">Hvor raskt kan jeg få time?</h3>
+            <p class="text-xs sm:text-sm text-es-secondary leading-relaxed">
+              Hos EmmaSofia har vi kort ventetid, og du kan som regel få en innledende samtale eller oppstartstime innen
+              få virkedager uten henvisning fra fastlege.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Behandlere Section: Exact EmmaSofia Therapist Cards -->
+    <section class="py-16 md:py-24 bg-es-tertiary">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-es-mainAccent text-center mb-12">
+          Behandlere — Helsepsykologi og sammensatte tilstander
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Therapist 1 -->
+          <div class="bg-white rounded-lg p-6 shadow-xs border border-stone-200">
+            <div class="h-64 rounded-md overflow-hidden mb-4">
+              <img src="https://emmasofia.no/app/uploads/annaclarsson-scaled.jpg"
+                alt="Anna Caroline Larsson – Psykolog Bergen" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-[11px] text-es-primary font-medium mb-1">Kroniske smerter, Depresjon, Helsepsykologi</p>
+            <h3 class="text-base font-bold text-es-main mb-1">Anna Caroline Larsson</h3>
+            <p class="text-xs text-es-secondary">Psykolog Bergen & Online</p>
+          </div>
+
+          <!-- Therapist 2 -->
+          <div class="bg-white rounded-lg p-6 shadow-xs border border-stone-200">
+            <div class="h-64 rounded-md overflow-hidden mb-4">
+              <img src="https://emmasofia.no/app/uploads/himani-scaled.jpg"
+                alt="Himani Kaushal – Psykologspesialist Online" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-[11px] text-es-primary font-medium mb-1">Traumer, Utmattelse, Angst, Psykosomatikk</p>
+            <h3 class="text-base font-bold text-es-main mb-1">Himani Kaushal</h3>
+            <p class="text-xs text-es-secondary">Psykologspesialist Online</p>
+          </div>
+
+          <!-- Therapist 3 -->
+          <div class="bg-white rounded-lg p-6 shadow-xs border border-stone-200">
+            <div class="h-64 rounded-md overflow-hidden mb-4">
+              <img src="https://emmasofia.no/app/uploads/img_1428-modified.jpg"
+                alt="Linda Holte – Psykologspesialist Oslo" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-[11px] text-es-primary font-medium mb-1">Søvnvansker, Depresjon, Samliv, Helseangst</p>
+            <h3 class="text-base font-bold text-es-main mb-1">Linda Holte</h3>
+            <p class="text-xs text-es-secondary">Psykologspesialist Oslo & Online</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. Footer: Exact EmmaSofia 4-Column Footer -->
+  <footer class="bg-es-main text-stone-400 py-16 border-t border-stone-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand Info -->
+      <div class="space-y-4">
+        <a href="https://emmasofia.no/" class="block">
+          <img width="200" height="42"
+            src="https://emmasofia.no/app/uploads/2023/12/KlinikkENE-Logo-Left-Dark-Grey-on-Transparent.png"
+            class="h-9 w-auto brightness-200 invert" alt="EmmaSofia" />
+        </a>
+        <p class="text-stone-400 leading-relaxed">
+          En av Norges største og ledende private psykologklinikker. Vi tilbyr helhetlig psykologisk og psykiatrisk
+          oppfølging tilpasset dine unike behov.
+        </p>
+      </div>
+
+      <!-- Locations -->
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-xs tracking-wider uppercase">Våre avdelinger</h4>
+        <ul class="space-y-2 text-stone-400">
+          <li><strong class="text-stone-200">Oslo:</strong> Parkveien 35</li>
+          <li><strong class="text-stone-200">Bergen:</strong> Strandgaten 19</li>
+          <li><strong class="text-stone-200">Fredrikstad:</strong> Storgata 4</li>
+          <li><strong class="text-stone-200">Online:</strong> Tilgjengelig i hele Norge</li>
+        </ul>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-xs tracking-wider uppercase">Utvalgte utfordringer</h4>
+        <ul class="space-y-2 text-stone-400">
+          <li><a href="#" class="hover:text-white transition">ADHD</a></li>
+          <li><a href="#" class="hover:text-white transition">Depresjon</a></li>
+          <li><a href="#" class="hover:text-white transition">Traumer / PTSD</a></li>
+          <li><a href="#" class="hover:text-white transition">Angst</a></li>
+          <li><a href="#" class="text-stone-200 font-semibold hover:text-white transition">Psykiske med fysiske
+              symptomer</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-xs tracking-wider uppercase">Kontakt oss</h4>
+        <ul class="space-y-2 text-stone-400">
+          <li>E-post: <a href="mailto:post@emmasofia.no" class="hover:text-white transition">post@emmasofia.no</a></li>
+          <li>Telefon: +47 922 93 108</li>
+          <li class="pt-2 text-stone-500">Sikker og kryptert pasientflyt.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between text-stone-500">
+      <p>&copy; 2026 EmmaSofia AS. Alle rettigheter reservert.</p>
+      <div class="flex gap-6 mt-4 sm:mt-0">
+        <a href="https://emmasofia.no/personvernerklaering/" class="hover:underline">Personvernerklæring</a>
+        <a href="#" class="hover:underline">Informasjonskapsler</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Custom Modal Functions
+    function openModal(title, message) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-message').innerText = message;
+      document.getElementById('custom-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('custom-modal').classList.add('hidden');
+    }
+
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('custom-modal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+
+</html>
