@@ -296,7 +296,7 @@
          testene Utbrenthetstesten / Helseangsttesten; kontroller priser, varighet, lokasjoner og ventetid mot faktisk tilgjengelighet;
          avklar hvilke behandlere som tar oppstartssamtaler; avklar om diabetes, kirurgi, kreft og palliasjon skal inngå ved lansering;
          få testsidene faglig gjennomgått (helsepsykolog + legespesialist);
-         få de tre hovedplagene på hvert av de ni områdekortene faglig gjennomgått (særlig: hvilken pasientgruppe Utmattelse-kortet gjelder, tredje punkt under Migrene, og «sorg» under fysisk sykdom). -->
+         få de tre hovedplagene på hvert av de ti områdekortene som har dem faglig gjennomgått (særlig: hvilken pasientgruppe Utmattelse-kortet gjelder, tredje punkt under Migrene, hvilke tilstander Kvinnehelse-kortet skal dekke, og at frykt for nye anfall under Panikkangst er et kjernesymptom, ikke samsykelighet). Kortene Fysisk sykdom, Medisinske prosedyrer og Palliasjon bruker «ofte følger med … for eksempel»-formuleringen i stedet for tre rangerte hovedplager; avklar om Palliasjon-kortet også skal nevne pårørende. -->
 
     <!-- 1. Hero: kort overskrift -->
     <section class="relative w-full min-h-[400px] md:min-h-[460px] flex items-center overflow-hidden bg-es-main">
@@ -370,11 +370,43 @@
               sjekking av kroppen og behov for å bli beroliget gang på gang, samt andre psykiske belastninger som ofte
               følger med.</p>
           </div>
+          <div id="panikkangst" class="scroll-mt-24 bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="text-lg font-bold text-es-mainAccent mb-2">Panikkangst</h3>
+            <p class="text-sm text-es-secondary leading-relaxed">Hjelp med frykt for nye panikkanfall, nedstemthet og
+              unngåelse av steder eller situasjoner, samt andre psykiske belastninger som ofte følger med.</p>
+          </div>
+          <div id="kvinnehelse" class="scroll-mt-24 bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="text-lg font-bold text-es-mainAccent mb-2">Kvinnehelse</h3>
+            <p class="text-sm text-es-secondary leading-relaxed">Hjelp med nedstemthet, uro og søvnproblemer, samt andre
+              psykiske belastninger som ofte følger med, for eksempel ved utfordringer knyttet til <strong
+                class="font-semibold text-es-main/85">menstruasjon, fertilitet, graviditet, tiden etter fødsel og
+                overgangsalder</strong>.</p>
+          </div>
           <div id="fysisk-sykdom" class="scroll-mt-24 bg-white rounded-xl p-6 border border-stone-200">
             <h3 class="text-lg font-bold text-es-mainAccent mb-2">Psykiske belastninger ved fysisk sykdom</h3>
-            <p class="text-sm text-es-secondary leading-relaxed">Hjelp med uro for fremtiden, nedstemthet og sorg over
-              det du har mistet, samt andre psykiske belastninger som ofte følger med.</p>
+            <p class="text-sm text-es-secondary leading-relaxed">Hjelp med psykiske belastninger som ofte følger med
+              fysisk sykdom, for eksempel <strong class="font-semibold text-es-main/85">kreft, diabetes og
+                tinnitus</strong>.</p>
           </div>
+          <div id="medisinske-prosedyrer" class="scroll-mt-24 bg-white rounded-xl p-6 border border-stone-200">
+            <h3 class="text-lg font-bold text-es-mainAccent mb-2">Psykiske belastninger ved medisinske prosedyrer</h3>
+            <p class="text-sm text-es-secondary leading-relaxed">Hjelp med psykiske belastninger som ofte følger med
+              medisinske prosedyrer, for eksempel <strong class="font-semibold text-es-main/85">etter kirurgi, ved
+                MR-undersøkelse og under fysioterapi og rehabilitering</strong>.</p>
+          </div>
+          <!-- Klikkbart kort: lenker til egen side. Skiller seg fra de andre kortene med lett skygge,
+               «Les mer»-rad med pil (synlig også på mobil uten hover), løft og kantfarge ved hover samt fokusring for tastatur. -->
+          <a id="palliasjon" href="https://emmasofia.no/utfordring/palliasjon/"
+            class="group scroll-mt-24 flex flex-col bg-white rounded-xl p-6 border border-stone-200 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-es-mainAccent hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-es-buttonPurple focus-visible:ring-offset-2 focus-visible:ring-offset-es-tertiary">
+            <h3 class="text-lg font-bold text-es-mainAccent mb-2 group-hover:underline">Palliasjon</h3>
+            <p class="text-sm text-es-secondary leading-relaxed">Hjelp med psykiske belastninger som ofte følger med
+              lindrende behandling.
+            </p>
+            <span class="mt-auto pt-4 inline-flex items-center gap-2 text-sm font-semibold text-es-buttonPurple">Les mer
+              om palliasjon <i
+                class="fa-solid fa-arrow-right text-xs transition-transform duration-150 group-hover:translate-x-1"
+                aria-hidden="true"></i></span>
+          </a>
         </div>
         <p
           class="mt-8 max-w-3xl text-sm sm:text-base text-es-secondary leading-relaxed border-l-4 border-es-primaryAccent pl-4">
@@ -523,7 +555,8 @@
           <div class="bg-white rounded-xl p-6 border border-stone-200">
             <div
               class="w-11 h-11 rounded-full bg-es-primaryAccent/40 text-es-buttonPurple flex items-center justify-center mb-4">
-              <i class="fa-solid fa-user"></i></div>
+              <i class="fa-solid fa-user"></i>
+            </div>
             <h3 class="text-lg font-bold text-es-mainAccent mb-1">Psykologbehandling</h3>
             <p class="text-xs font-semibold text-es-main mb-3">Passer ved alle områdene over</p>
             <p class="text-sm text-es-secondary leading-relaxed">Individuelle samtaler for deg med smerter, utmattelse,
@@ -534,7 +567,8 @@
           <div class="bg-white rounded-xl p-6 border border-stone-200">
             <div
               class="w-11 h-11 rounded-full bg-es-primaryAccent/40 text-es-buttonPurple flex items-center justify-center mb-4">
-              <i class="fa-solid fa-stethoscope"></i></div>
+              <i class="fa-solid fa-stethoscope"></i>
+            </div>
             <h3 class="text-lg font-bold text-es-mainAccent mb-1">Konsultasjon hos legespesialist</h3>
             <p class="text-xs font-semibold text-es-main mb-3">Når noe bør avklares medisinsk</p>
             <p class="text-sm text-es-secondary leading-relaxed">Konsultasjon når det er behov for en medisinsk
@@ -544,7 +578,8 @@
           <div class="bg-white rounded-xl p-6 border border-stone-200">
             <div
               class="w-11 h-11 rounded-full bg-es-primaryAccent/40 text-es-buttonPurple flex items-center justify-center mb-4">
-              <i class="fa-solid fa-capsules"></i></div>
+              <i class="fa-solid fa-capsules"></i>
+            </div>
             <h3 class="text-lg font-bold text-es-mainAccent mb-1">Medisinassistert behandling</h3>
             <p class="text-xs font-semibold text-es-main mb-3">Kun etter individuell vurdering</p>
             <p class="text-sm text-es-secondary leading-relaxed">Vurderes av lege og psykolog, og er ikke et generelt
