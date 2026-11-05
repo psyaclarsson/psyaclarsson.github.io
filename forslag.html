@@ -991,9 +991,6 @@
       const isLast = pageIndex === s.pages.length - 1;
       const multi = s.pages.length > 1;
 
-      const logo = s.logo
-        ? `<img class="slide-logo" src="${s.logo}" alt="" onerror="this.style.display='none'">`
-        : '';
       // Every slide: section title on the small line, slide title as the big heading.
       const eyebrow = `<p class="slide-eyebrow">${s.title}</p>`;
       const listTag = page.ordered ? 'ol' : 'ul';
@@ -1021,7 +1018,6 @@
         <article class="slide-card" style="--accent:${s.accent}">
           <header class="slide-head">
             <button class="slide-icon" onclick="closeSlide()" aria-label="Tilbake til diagrammet" title="Tilbake til diagrammet">${iconHtml(id)}</button>
-            ${logo}
             <div>
               ${eyebrow}
               <h2 class="slide-title">${page.title}</h2>
