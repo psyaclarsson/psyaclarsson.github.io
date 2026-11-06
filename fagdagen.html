@@ -421,9 +421,7 @@
           <text x="450" y="6" text-anchor="middle" class="label-pill" fill="#c084fc">Klinisk helsepsykologi</text>
         </g>
 
-        <g id="node-circle_kap" onclick="showInfo('circle_kap')" style="cursor:pointer">
-          <rect x="250" y="765" width="400" height="34" rx="8" fill="none" stroke="#ffffff" stroke-width="2.5"
-            opacity="0" pointer-events="none" />
+        <g id="node-circle_kap">
           <text x="450" y="789" text-anchor="middle" class="label-pill" fill="#f472b6">Ketaminassistert
             psykoterapi</text>
         </g>
@@ -611,7 +609,7 @@
           {
             title: "Spesialisering i klinisk helsepsykologi",
             list: [
-              '<a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/klinisk-helsepsykologi-3" target="_blank" rel="noopener">Ny spesialisering</a>, færre enn 10 uteksaminerte spesialister i Norge',
+              '<a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/klinisk-helsepsykologi-3" target="_blank" rel="noopener">Ny spesialisering</a>, færre enn 12 uteksaminerte spesialister i Norge',
               'I Sverige: 18 uteksaminerte spesialister (inkludert meg)',
               "Vitenskapsbasert, helhetlig tilnærming",
               "Fokus på kroniske tilstander og somatisk-psykiske komorbiditeter"
@@ -633,15 +631,6 @@
             title: "Pasienter uten tilbud",
             visual: '<img src="ToStoler.png" alt="Pasienter uten tilbud – To stoler" class="slide-img" />'
           }
-        ]
-      },
-      circle_kap: {
-        accent: "#f472b6",
-        title: "Ketaminassistert psykoterapi (KAP)",
-        pages: [
-          { title: "Oversikt", text: "En ny behandlingsform som kombinerer subanestetiske ketamininfusjoner med strukturerte psykoterapitimer for raskt å behandle behandlingsresistent depresjon (TRD) og andre refraktære tilstander." },
-          { title: "Slik fungerer det", text: "Eksempelslide: plassholdertekst som forklarer mekanismen og strukturen i en KAP-økt." },
-          { title: "Sikkerhet og screening", text: "Eksempelslide: plassholdertekst om screening, overvåking og sikkerhetsvurderinger." }
         ]
       },
       psyk: {
@@ -680,11 +669,7 @@
         logo: "EmmaSofia.png",
         pages: [
           {
-            title: "Konkret forslag",
-            ordered: "none",
-            list: [
-              '<button type="button" class="slide-link" onclick="jumpTo(\'axon\', 1)">(#1)</button> Skikkelig innføring av behandling (med eller uten KAP) for somatiske komorbiditeter i EmmaSofia'
-            ]
+            title: ""
           }
         ]
       },
@@ -693,44 +678,62 @@
         title: "Senter for smerte og helsepsykologi",
         pages: [
           {
-            title: "Eksempler",
+            title: "Lignende pasientprofil",
+            visual: '<img src="ToStoler.png" alt="Lignende pasientprofil – To stoler" class="slide-img" />'
+          },
+          {
+            title: "Lignende pasientprofil",
             list: [
-              'Tverrfaglig behandling for somatiske tilstander:' +
-              '<ul class="slide-sublist">' +
-              '<li>Kroniske smerter og komorbid depresjon/angst</li>' +
-              '<li>Langvarige plager og hodepine</li>' +
-              '<li>Kombinasjon av evidensbasert helsepsykologi og KAP</li>' +
-              '</ul>'
+              "Har allerede prøvd både tradisjonell medisinsk og psykologisk behandling",
+              "Tilstandene er ofte kroniske og sammensatte, med fysiske symptomer",
+              "Bare ved å beskrive helsepsykologi på min EmmaSofia-profil har det vært en jevn strøm av slike pasienter",
+              "Inkludert ketaminpasienter: TRD komorbid med somatiske utfordringer",
+              "F.eks. nylig en ketaminpasient: TRD komorbid med migrene"
             ]
           },
           {
-            title: "Forslag #1",
-            ordered: "alpha",
+            title: "Helsepsykologi inn i EmmaSofias portefølje",
+            visual: '<img src="ToStolerES.png" alt="Helsepsykologi inn i EmmaSofias portefølje" class="slide-img" />'
+          },
+          {
+            title: "Nettsidene",
             list: [
-              "EmmaSofia legger somatiske komorbiditeter til i sin liste over tilstander",
-              'Relevante sider beskriver helhetlig psykoterapi:' +
+              'På <a href="https://emmasofia.no/smerte-og-helsepsykologi" target="_blank" rel="noopener">hovedsiden</a> listes 12 fokusområder:' +
               '<ul class="slide-sublist">' +
-              '<li>hvis den somatiske tilstanden er komorbid med kvalifiserende depresjon, tilbys KAP</li>' +
-              '<li>ellers tilbys spesialisert behandling fra helsepsykologi</li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/langvarige-smerter/" target="_blank" rel="noopener">Langvarige smerter</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/utmattelse/" target="_blank" rel="noopener">Utmattelse</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/fibromyalgi/" target="_blank" rel="noopener">Fibromyalgi</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/ibs-og-vedvarende-mageplager/" target="_blank" rel="noopener">IBS og vedvarende mageplager</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/migrene-og-hodepine/" target="_blank" rel="noopener">Migrene og hodepine</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/sovnvansker/" target="_blank" rel="noopener">Søvnvansker</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/helseangst/" target="_blank" rel="noopener">Helseangst</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/kvinnehelse/" target="_blank" rel="noopener">Kvinnehelse</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/utbrenthet/" target="_blank" rel="noopener">Utbrenthet</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/palliasjon/" target="_blank" rel="noopener">Palliasjon</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-fysisk-sykdom/" target="_blank" rel="noopener">Psykiske belastninger ved fysisk sykdom</a></li>' +
+              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-medisinske-prosedyrer/" target="_blank" rel="noopener">Psykiske belastninger ved medisinske prosedyrer</a></li>' +
               '</ul>',
-              'Internt samarbeid:' +
-              '<ul class="slide-sublist">' +
-              '<li>et ukentlig fagmøte settes opp</li>' +
-              '<li>et internt henvisningssystem</li>' +
-              '</ul>'
+              "Tanken er å tilby protokollbasert psykologisk behandling skreddersydd for hvert somatiske område"
             ]
           },
           {
-            title: "Forslag #1 – plan",
+            title: "Eksempel på pasientforløp",
+            intro: "La oss ta insomni som eksempel:",
             ordered: "decimal",
             list: [
-              "Drøfte gjennomførbarhet og juridisk rammeverk for KAP ved somatisk komorbiditet",
-              'Avhengig av (1) setter ACL sammen en mal for siden:' +
-              '<ul class="slide-sublist slide-sublist-plain">' +
-              '<li>klinisk helsepraksis med eller uten KAP</li>' +
+              '<strong>Oppstartsamtale:</strong>' +
+              '<ul class="slide-sublist">' +
+              '<li>Insomni identifiseres som et hovedproblem, og pasienten ønsker fokus på dette</li>' +
+              '<li>Prosessen innebærer en biopsykososial utredning</li>' +
+              '<li>Det vil tilbys kurs holdt av en ekstern ekspert for alle interesserte</li>' +
+              '<li>Det vil foreligge gode maler og relevante spørreskjemaer i Psykbase</li>' +
               '</ul>',
-              "Nettsiden oppdateres",
-              "Parallelt med (3) oppdaterer teamet og ACL den kliniske arbeidsflyten"
+              '<strong>Spesialisert behandling:</strong>' +
+              '<ul class="slide-sublist">' +
+              '<li>Ideelt sett følger terapeuten en manualisert protokoll som CBT-I</li>' +
+              '<li>For psykologer som er fortrolige med protokollbaserte behandlingsmetoder, vil de spesifikke manualene gjøres tilgjengelige</li>' +
+              '</ul>',
+              "<strong>Medisinassistert psykoterapi:</strong> Dersom TRD (behandlingsresistent depresjon) identifiseres som en nøkkelfaktor, tilbys KAP-forløp"
             ]
           }
         ]
@@ -803,6 +806,7 @@
       const body = page.visual
         ? `<div class="slide-visual">${page.visual}</div>`
         : (page.text ? `<p class="slide-body">${page.text}</p>` : '') +
+        (page.intro ? `<p class="slide-body slide-intro">${page.intro}</p>` : '') +
         (page.list ? `<${listTag} class="slide-list${page.ordered ? ' slide-list-' + page.ordered : ''}">${page.list.map(item => `<li>${item}</li>`).join('')}</${listTag}>` : '') +
         (page.after ? `<p class="slide-body slide-after">${page.after}</p>` : '');
 
