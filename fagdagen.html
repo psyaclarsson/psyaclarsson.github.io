@@ -1067,11 +1067,6 @@
       renderSlide(_activeId, _page, true);
     }
 
-    // Click on empty space (outside diagram and slide) closes the slide
-    stage.addEventListener('click', e => {
-      if (!e.target.closest('svg, .slide-card')) closeSlide();
-    });
-
     // Keyboard: Esc closes, → next page, ← previous page
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeSlide();
