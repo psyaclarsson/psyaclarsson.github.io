@@ -154,6 +154,14 @@
       flex: 1;
     }
 
+    .slide-content-centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
     .slide-body {
       margin: 0;
       font-size: clamp(1.15rem, 1.4vw, 1.4rem);
@@ -344,6 +352,23 @@
       max-height: min(65vh, 580px);
       width: 100%;
       object-fit: contain;
+    }
+
+    .slide-split-row.slide-split-full {
+      gap: 0;
+    }
+
+    .slide-split-row.slide-split-full .slide-split-col:first-child {
+      display: none;
+    }
+
+    .slide-split-row.slide-split-full .slide-split-col.slide-visual {
+      flex: 1 1 100%;
+    }
+
+    .slide-split-row.slide-split-full .slide-split-col .slide-img {
+      max-height: min(68vh, 650px);
+      width: auto;
     }
 
     @media (max-width: 900px) {
@@ -643,7 +668,11 @@
             list: [
               "Kronisk <u>smerte</u> komorbid med alvorlig <u>depressiv</u> lidelse",
               "Kronisk <u>søvnforstyrrelse</u> komorbid med generalisert <u>angst</u>lidelse",
-              "Traume etter <u>medisinsk prosedyre</u> komorbid med <u>PTSD</u>"
+              "Traume etter <u>medisinsk prosedyre</u> komorbid med <u>PTSD</u>",
+              "Begge retninger og til og med sløyfer av årsakssammenheng: stress kan føre til anspente skuldre, som igjen gjør pasienten mer irritabel.",
+              "Også det som før ble kalt «psykosomatiske» tilstander: Angst forverrer IBS-symptomer"
+
+
             ]
           },
           {
@@ -663,7 +692,13 @@
             title: "Helsepsykologi utenfor spesialiseringen",
             list: [
               "Noen psykologer har allerede erfaring med fagfeltet",
-              'For eksempel ved høyspesialiserte enheter som:' +
+              'F.eks. nærliggende spesialiseringer:' +
+              '<ul class="slide-sublist">' +
+              '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/nevropsykologi-5" target="_blank" rel="noopener">Nevropsykologi</a></li>' +
+              '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/habiliteringspsykologi-2" target="_blank" rel="noopener">Habiliteringspsykologi</a></li>' +
+              '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/psykoterapi" target="_blank" rel="noopener">Psykoterapi</a></li>' +
+              '</ul>',
+              'Eller psykologer med erfaring fra høyspesialiserte enheter:' +
               '<ul class="slide-sublist">' +
               '<li>Smerteklinikker</li>' +
               '<li>Søvnsentre</li>' +
@@ -674,7 +709,8 @@
           {
             title: "Egne erfaringer fra Vest-Sverige",
             list: [
-              "<strong>2018:</strong> Et lite FoU-prosjekt innen helsepsykologi",
+              "<strong>Bakgrunn:</strong> Svensk spesialisering i helsepsykologi, svensk spesialisering i AFPT psykoterapi og pågående norsk spesialisering i klinisk helsepsykologi (smerte)",
+              "<strong>2018:</strong> Som en del av min spesialistutdanning, et lite FoU-prosjekt innen helsepsykologi",
               "<strong>2019:</strong> Tilbød skreddersydd psykologisk behandling for spesifikke somatiske komorbiditeter ved noen få lokale helsesentre",
               '<strong>Kort tid etter:</strong> Massiv økning i:' +
               '<ul class="slide-sublist">' +
@@ -706,6 +742,11 @@
               "Likevel forblir andre helsepsykologiske tilstander uadressert",
               "Per i dag er privat sektor det eneste alternativet"
             ]
+          },
+          {
+            title: "Observasjon",
+            centered: true,
+            text: "Per i dag har pasienter med helsepsykologiske tilstander under høy alvorlighetsgrad ingen egnede alternativer utenom privat sektor!<br><br>Det fantes heller ikke noe privat spesialistsenter for helsepsykologi ... <strong>før nå!</strong>"
           }
         ]
       },
@@ -744,7 +785,16 @@
               '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/palliasjon/" target="_blank" rel="noopener">Palliasjon</a></li>' +
               '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-fysisk-sykdom/" target="_blank" rel="noopener">Belastninger v/ fysisk sykdom</a></li>' +
               '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-medisinske-prosedyrer/" target="_blank" rel="noopener">Belastninger v/ prosedyrer</a></li>' +
-              '</ul>'
+              '</ul>',
+              'Målet er å tilby spesialiserte behandlinger per problemområde'
+            ]
+          },
+          {
+            title: "Modell",
+            intro: "To parallelle behandlingsmodeller",
+            list: [
+              "<strong>Galleri-modell:</strong> erfarne psykologer følger egen tilnærming",
+              "<strong>EBBA-modell:</strong> EvidensBasert Behandling for Alle, spesifikke protokollbaserte metoder, spesielt for psykologer som er nye på feltet"
             ]
           },
           {
@@ -756,7 +806,7 @@
               '<ul class="slide-sublist">' +
               '<li>Insomni identifiseres som et hovedproblem, og pasienten ønsker fokus på dette</li>' +
               '<li>Ideelt sett, men ikke nødvendigvis, innebærer prosessen en biopsykososial utredning</li>' +
-              '<li>Det vil tilbys kurs holdt av en ekstern ekspert for alle interesserte</li>' +
+              '<li>Det vil tilbys kurs i biopsykososial utredning holdt av en ekstern ekspert</li>' +
               '<li>Det vil foreligge maler og relevante spørreskjemaer i Psykbase</li>' +
               '</ul>',
               '<strong>Spesialisert behandling:</strong>' +
@@ -764,6 +814,7 @@
               '<li>Erfarne psykologer kan velge ulike metoder</li>' +
               '<li>Ideelt sett, men ikke nødvendigvis, følger behandleren en protokollbasert metode som CBT-I</li>' +
               '<li>Det vil foreligge retningslinjer for CBT-I for interesserte behandlere</li>' +
+              '<li>Det vil tilbys kurs i CBT-I eller protokollbasert behandling holdt av en ekstern ekspert</li>' +
               '</ul>',
               '<strong>Medisinassistert psykoterapi:</strong>' +
               '<ul class="slide-sublist">' +
@@ -781,8 +832,9 @@
               '<ul class="slide-sublist">' +
               '<li>Kurs med eksterne forelesere</li>' +
               '<li>Følge, lære og videreutvikle de skreddersydde protokollene som tilbys</li>' +
-              '<li>Auskultasjon: delta på pasientsesjoner utført av meg og andre erfarne behandlere</li>' +
-              '</ul>'
+              '<li>Gjensidig auskultasjon: vi deltar på hverandres pasientsesjoner og diskuterer hvordan vi kan forbedre oss</li>' +
+              '</ul>',
+              'Nettsidene til senteret skal representere oss alle, innspill og forslag er hjertelig velkomne'
             ]
           }
 
@@ -797,6 +849,9 @@
     let _activeId = null;
     let _page = 0;
     let _subslide = 0;
+    let _lastActiveId = null;
+    let _lastPage = 0;
+    let _lastSubslide = 0;
     let _busy = false;
 
     const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -882,6 +937,10 @@
     }
 
     function revealSubslide(index, animate) {
+      const splitRow = slideEl.querySelector('.slide-split-row');
+      if (splitRow && index >= 1) {
+        splitRow.classList.remove('slide-split-full');
+      }
       const items = slideEl.querySelectorAll('.slide-item');
       const itemIndex = index - 1;
       if (items[itemIndex]) {
@@ -900,6 +959,12 @@
       if (items[itemIndex]) {
         items[itemIndex].classList.remove('slide-item-visible', 'slide-item-animate');
         items[itemIndex].classList.add('slide-item-hidden');
+      }
+      if (index === 1) {
+        const splitRow = slideEl.querySelector('.slide-split-row');
+        if (splitRow) {
+          splitRow.classList.add('slide-split-full');
+        }
       }
     }
 
@@ -923,8 +988,9 @@
 
       let body;
       if (page.split) {
+        const isFullVisual = (_subslide === 0 && page.list && page.list.length > 0);
         body = `
-          <div class="slide-split-row">
+          <div class="slide-split-row${isFullVisual ? ' slide-split-full' : ''}">
             <div class="slide-split-col">
               ${page.intro ? `<p class="slide-body slide-intro">${page.intro}</p>` : ''}
               ${listHtml}
@@ -966,7 +1032,7 @@
               <h2 class="slide-title">${page.title}</h2>
             </div>
           </header>
-          <div class="slide-content-area">
+          <div class="slide-content-area${page.centered ? ' slide-content-centered' : ''}">
             ${body}
           </div>
           ${nav}
@@ -1034,12 +1100,12 @@
       return g;
     }
 
-    function showInfo(id) {
+    function showInfo(id, page = 0, subslide = 0) {
       if (_busy || _activeId) return;
       _busy = true;
       _activeId = id;
-      _page = 0;
-      _subslide = 0;
+      _page = page;
+      _subslide = subslide;
       setHighlight(id, true);
       renderSlide(id, _page, false);
       stage.classList.add('has-slide');
@@ -1085,6 +1151,9 @@
       if (_busy || !_activeId) return;
       _busy = true;
       const id = _activeId;
+      _lastActiveId = _activeId;
+      _lastPage = _page;
+      _lastSubslide = _subslide;
       const t = shrinkTransform(regionFor(id));   // measure while the slide is still there
       setHighlight(id, false);
       _activeId = null;
@@ -1176,8 +1245,13 @@
       if (e.key === 'Escape') {
         closeSlide();
       } else if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-        if (!_activeId || _busy) return;
+        if (_busy) return;
         if (e.key === ' ' && (e.target.tagName === 'BUTTON' || e.target.tagName === 'A')) return;
+        if (!_activeId) {
+          e.preventDefault();
+          showInfo('circle_health');
+          return;
+        }
         e.preventDefault();
         const s = slides[_activeId];
         const page = s.pages[_page];
@@ -1189,7 +1263,14 @@
           nextPage();
         }
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        if (!_activeId || _busy) return;
+        if (_busy) return;
+        if (!_activeId) {
+          if (_lastActiveId && slides[_lastActiveId]) {
+            e.preventDefault();
+            showInfo(_lastActiveId, _lastPage, _lastSubslide);
+          }
+          return;
+        }
         e.preventDefault();
         prevPage();
       }
