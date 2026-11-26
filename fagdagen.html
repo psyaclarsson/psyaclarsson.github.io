@@ -78,7 +78,6 @@
       position: relative;
       background: #1e293b;
       border: 1px solid #334155;
-      border-top: 4px solid var(--accent);
       border-radius: 1rem;
       padding: clamp(1.2rem, 2.2vw, 2.2rem);
       min-height: 94vh;
@@ -445,6 +444,16 @@
       margin: 1.5rem auto 0 auto;
     }
 
+    .main-venn {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: min(65vh, 640px);
+      max-height: 65vh;
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+    }
+
     .slide-img {
       display: block;
       max-width: 100%;
@@ -486,50 +495,9 @@
 
 <body>
 
-  <main class="stage" id="stage">
+  <main class="stage has-slide" id="stage">
 
-    <div class="diagram-wrap" id="diagramWrap">
-      <!-- Venn Diagram SVG -->
-      <svg viewBox="170 -30 560 855" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-
-        <!-- Two Main Intersecting Circles (Vertical Orientation, enlarged) -->
-        <!-- Circle 1: Health Psychology (Top) -->
-        <circle cx="450" cy="275" r="230" fill="rgba(168, 85, 247, 0.18)" stroke="#a855f7" stroke-width="3" />
-
-        <!-- Circle 2: Ketamine-Assisted Psychotherapy (Bottom) -->
-        <circle cx="450" cy="505" r="230" fill="rgba(236, 72, 153, 0.18)" stroke="#ec4899" stroke-width="3" />
-
-        <!-- Category Labels Inside Circles -->
-        <g id="node-circle_health" onclick="showInfo('circle_health')" style="cursor:pointer">
-          <rect x="340" y="157" width="220" height="36" rx="8" fill="none" stroke="#ffffff" stroke-width="2.5"
-            opacity="0" pointer-events="none" />
-          <text x="450" y="181" text-anchor="middle" class="label-pill" fill="#c084fc">Helsepsykologi</text>
-        </g>
-
-        <g id="node-circle_kap">
-          <text x="450" y="611" text-anchor="middle" class="label-pill" fill="#f472b6">EmmaSofia</text>
-        </g>
-
-        <!-- Center Intersection: Senter for smerte og helsepsykologi -->
-        <g id="node-axon" class="logo-node" onclick="showInfo('axon')" style="cursor:pointer">
-          <rect x="350" y="346" width="200" height="80" rx="10" fill="none" stroke="#38bdf8" stroke-width="2.5"
-            opacity="0" pointer-events="all" />
-          <text text-anchor="middle" class="dir-title" fill="#e0f2fe">
-            <tspan x="450" y="365" font-size="17" font-weight="700">Senter for</tspan>
-            <tspan x="450" y="391" font-size="19" font-weight="700">smerte og</tspan>
-            <tspan x="450" y="417" font-size="17" font-weight="700">helsepsykologi</tspan>
-          </text>
-        </g>
-      </svg>
-    </div>
-
-    <!-- Slide area: empty until something is selected -->
+    <!-- Slide area -->
     <aside class="slide-wrap" aria-live="polite">
       <div class="slide" id="slide"></div>
     </aside>
@@ -544,6 +512,26 @@
        and can have `text`, `list` (array of bullet points), or `visual` (custom markup).
        `logo` is optional.
        ------------------------------------------------------------------ */
+    const mainVenn = `
+      <svg class="main-venn" viewBox="205 35 490 710" xmlns="http://www.w3.org/2000/svg" role="img"
+        aria-label="Helsepsykologi og EmmaSofia møtes i Senter for smerte og helsepsykologi">
+        <circle cx="450" cy="275" r="230" fill="rgba(168, 85, 247, 0.18)" stroke="#a855f7" stroke-width="3" />
+        <circle cx="450" cy="505" r="230" fill="rgba(236, 72, 153, 0.18)" stroke="#ec4899" stroke-width="3" />
+        <g onclick="goToId('helsepsykologi')" style="cursor:pointer">
+          <text x="450" y="181" text-anchor="middle" class="label-pill" fill="#c084fc">Helsepsykologi</text>
+        </g>
+        <g>
+          <text x="450" y="611" text-anchor="middle" class="label-pill" fill="#f472b6">EmmaSofia</text>
+        </g>
+        <g onclick="goToId('senter')" style="cursor:pointer">
+          <text text-anchor="middle" class="dir-title" fill="#e0f2fe">
+            <tspan x="450" y="365" font-size="17" font-weight="700">Senter for</tspan>
+            <tspan x="450" y="391" font-size="19" font-weight="700">smerte og</tspan>
+            <tspan x="450" y="417" font-size="17" font-weight="700">helsepsykologi</tspan>
+          </text>
+        </g>
+      </svg>`;
+
     const miniVenn = `
       <svg class="mini-venn" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img"
         aria-label="Venndiagram: Somatisk og psykisk overlapper i somatisk-psykisk komorbiditet">
@@ -564,340 +552,209 @@
         </text>
       </svg>`;
 
-    /* Mini two-circle icon (Health Psychology Top and KAP Bottom) */
-    const ICON_REGION = { x: 200, y: 35, w: 500, h: 710 };   // in big-diagram viewBox units
-    const iconSvg = `
-      <svg viewBox="${ICON_REGION.x} ${ICON_REGION.y} ${ICON_REGION.w} ${ICON_REGION.h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="450" cy="275" r="230" fill="rgba(168, 85, 247, 0.18)" stroke="#a855f7" stroke-width="14" />
-        <circle cx="450" cy="505" r="230" fill="rgba(236, 72, 153, 0.18)" stroke="#ec4899" stroke-width="14" />
-      </svg>`;
-
-    /* The two main circles: for these topics the slide icon is just that one circle
-       (the other circle is left out), and the diagram shrinks onto that circle. */
-    const CIRCLES = {
-      circle_health: { idx: 0, cx: 450, cy: 275, fill: 'rgba(168, 85, 247, 0.18)', stroke: '#a855f7' },
-      circle_kap: { idx: 1, cx: 450, cy: 505, fill: 'rgba(236, 72, 153, 0.18)', stroke: '#ec4899' }
-    };
-
-    /* The logo / intersection nodes: each marks one specific region of the Venn diagram.
-       inc = circles the region is inside, exc = circles it must be outside of.
-       0: Health Psychology (cx=450, cy=275), 1: KAP (cx=450, cy=505) */
-    const CIRCLE_GEOM = [{ cx: 450, cy: 275 }, { cx: 450, cy: 505 }];
-    const CIRCLE_STROKES = ['#a855f7', '#ec4899'];
-    const REGIONS = {
-      axon: { inc: [0, 1], exc: [], color: '#c084fc' }    // Health + KAP
-    };
-
-    // Bounding box of a region (in big-diagram units), found by sampling; cached
-    const _boxCache = {};
-    function regionBox(id) {
-      if (_boxCache[id]) return _boxCache[id];
-      const R = REGIONS[id];
-      const inside = (i, x, y) => {
-        const g = CIRCLE_GEOM[i];
-        return (x - g.cx) ** 2 + (y - g.cy) ** 2 <= 230 * 230;
-      };
-      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
-      for (let x = 150; x <= 750; x += 2) {
-        for (let y = 30; y <= 770; y += 2) {
-          if (R.inc.every(i => inside(i, x, y)) && !R.exc.some(i => inside(i, x, y))) {
-            if (x < x0) x0 = x; if (x > x1) x1 = x;
-            if (y < y0) y0 = y; if (y > y1) y1 = y;
-          }
-        }
-      }
-      const m = 10;   // margin for the outline
-      return (_boxCache[id] = { x: x0 - m, y: y0 - m, w: x1 - x0 + 2 * m, h: y1 - y0 + 2 * m });
-    }
-
-    // Draws just the region (fill + the outline of the circle edges that bound it)
-    function regionContent(id, p) {
-      const R = REGIONS[id];
-      const circ = (i, extra) =>
-        `<circle cx="${CIRCLE_GEOM[i].cx}" cy="${CIRCLE_GEOM[i].cy}" r="230" ${extra}/>`;
-      const defs =
-        R.inc.map((i, k) => `<clipPath id="${p}-in${k}">${circ(i, '')}</clipPath>`).join('') +
-        (R.exc.length
-          ? `<mask id="${p}-ex" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="800">
-               <rect x="0" y="0" width="900" height="800" fill="#fff" />
-               ${R.exc.map(i => circ(i, 'fill="#000"')).join('')}
-             </mask>`
-          : '');
-      const inner =
-        `<rect x="0" y="0" width="900" height="800" fill="${R.color}" fill-opacity="0.35" />` +
-        [0, 1].map(i => circ(i, `fill="none" stroke="${CIRCLE_STROKES[i]}" stroke-width="20"`)).join('');
-      let body = R.exc.length ? `<g mask="url(#${p}-ex)">${inner}</g>` : inner;
-      for (let k = R.inc.length - 1; k >= 0; k--) body = `<g clip-path="url(#${p}-in${k})">${body}</g>`;
-      return `<defs>${defs}</defs>${body}`;
-    }
-
-    // Region of the big diagram (viewBox units) that the slide icon represents
-    function regionFor(id) {
-      const c = CIRCLES[id];
-      if (c) return { x: c.cx - 235, y: c.cy - 235, w: 470, h: 470 };
-      if (REGIONS[id]) return regionBox(id);
-      return ICON_REGION;
-    }
-
-    function iconHtml(id) {
-      const c = CIRCLES[id];
-      const r = regionFor(id);
-      if (c) {
-        return `
-      <svg viewBox="${r.x} ${r.y} ${r.w} ${r.h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="${c.cx}" cy="${c.cy}" r="230" fill="${c.fill}" stroke="${c.stroke}" stroke-width="14" />
-      </svg>`;
-      }
-      if (REGIONS[id]) {
-        return `
-      <svg viewBox="${r.x} ${r.y} ${r.w} ${r.h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        ${regionContent(id, 'ic')}
-      </svg>`;
-      }
-      return iconSvg;
-    }
-
-    const slides = {
-      circle_health: {
-        accent: "#c084fc",
-        title: "Helsepsykologi",
-        pages: [
-          { title: "Somatisk-psykisk komorbiditet", visual: miniVenn },
-          {
-            title: "Eksempler",
-            list: [
-              "Kronisk <u>smerte</u> komorbid med alvorlig <u>depressiv</u> lidelse",
-              "Kronisk <u>søvnforstyrrelse</u> komorbid med generalisert <u>angst</u>lidelse",
-              "Traume etter <u>medisinsk prosedyre</u> komorbid med <u>PTSD</u>",
-              "Begge retninger og til og med sløyfer av årsakssammenheng: stress kan føre til anspente skuldre, som igjen gjør pasienten mer irritabel.",
-              "Også det som før ble kalt «psykosomatiske» tilstander: Angst forverrer IBS-symptomer"
+    const slides = [
+      {
+        eyebrow: "Fagdagen",
+        title: "Helsepsykologi & EmmaSofia",
+        visual: mainVenn
+      },
+      {
+        id: "helsepsykologi",
+        eyebrow: "Helsepsykologi",
+        title: "Somatisk-psykisk komorbiditet",
+        visual: miniVenn
+      },
+      {
+        eyebrow: "Helsepsykologi",
+        title: "Eksempler",
+        list: [
+          "Kronisk <u>smerte</u> komorbid med alvorlig <u>depressiv</u> lidelse",
+          "Kronisk <u>søvnforstyrrelse</u> komorbid med generalisert <u>angst</u>lidelse",
+          "Traume etter <u>medisinsk prosedyre</u> komorbid med <u>PTSD</u>",
+          "Begge retninger og til og med sløyfer av årsakssammenheng: stress kan føre til anspente skuldre, som igjen gjør pasienten mer irritabel.",
+          "Også det som før ble kalt «psykosomatiske» tilstander: Angst forverrer IBS-symptomer"
 
 
-            ]
-          },
-          {
-            title: "Pasienter uten tilbud",
-            visual: '<img src="ToStoler.png" alt="Pasienter uten tilbud – To stoler" class="slide-img" />'
-          },
-          {
-            title: "Spesialisering i klinisk helsepsykologi",
-            list: [
-              '<a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/klinisk-helsepsykologi-3" target="_blank" rel="noopener">Ny spesialisering</a>, færre enn 12 uteksaminerte spesialister i Norge',
-              'I Sverige: 18 uteksaminerte spesialister (inkludert meg)',
-              "Vitenskapsbasert, helhetlig tilnærming",
-              "Fokus på kroniske tilstander og somatisk-psykiske komorbiditeter"
-            ]
-          },
-          {
-            title: "Helsepsykologi utenfor spesialiseringen",
-            list: [
-              "Noen psykologer har allerede erfaring med fagfeltet",
-              'F.eks. nærliggende spesialiseringer:' +
-              '<ul class="slide-sublist">' +
-              '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/nevropsykologi-5" target="_blank" rel="noopener">Nevropsykologi</a></li>' +
-              '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/habiliteringspsykologi-2" target="_blank" rel="noopener">Habiliteringspsykologi</a></li>' +
-              '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/psykoterapi" target="_blank" rel="noopener">Psykoterapi</a></li>' +
-              '</ul>',
-              'Eller psykologer med erfaring fra høyspesialiserte enheter:' +
-              '<ul class="slide-sublist">' +
-              '<li>Smerteklinikker</li>' +
-              '<li>Søvnsentre</li>' +
-              '<li>Rehabiliterings- og habiliteringssentre</li>' +
-              '</ul>'
-            ]
-          },
-          {
-            title: "Egne erfaringer fra Vest-Sverige",
-            list: [
-              "<strong>Bakgrunn:</strong> Svensk spesialisering i helsepsykologi, svensk spesialisering i AFPT psykoterapi og pågående norsk spesialisering i klinisk helsepsykologi (smerte)",
-              "<strong>2018:</strong> Som en del av min spesialistutdanning, et lite FoU-prosjekt innen helsepsykologi",
-              "<strong>2019:</strong> Tilbød skreddersydd psykologisk behandling for spesifikke somatiske komorbiditeter ved noen få lokale helsesentre",
-              '<strong>Kort tid etter:</strong> Massiv økning i:' +
-              '<ul class="slide-sublist">' +
-              '<li>Antall pasienter</li>' +
-              '<li>Bredde og variasjon i somatiske tilstander</li>' +
-              '<li>Samarbeidende sentre (over 18 helsesentre)</li>' +
-              '</ul>',
-              '<strong>Noen få år senere:</strong> Det største knutepunktet i sitt slag i Vest-Sverige, med over 20 initiativer og RCT-studier' +
-              '<div style="margin-top: 0.6rem; font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">' +
-              'Eksempler fra i år:' +
-              '<ul class="slide-sublist">' +
-              '<li><a href="https://www.jmir.org/2026/1/e86792/" target="_blank" rel="noopener">JMIR Vol28 (2026)</a>, som kombinerer fysioterapi og CBT for kronisk smerte</li>' +
-              '<li><a href="https://formative.jmir.org/2026/1/e81285" target="_blank" rel="noopener">JMIR Formative Research Vol10 (2026)</a>, om blandet CBT og ACT for insomni</li>' +
-              '<li><a href="https://gup.ub.gu.se/publication/359583" target="_blank" rel="noopener">Under publisering</a>, om blandet ACT for migrene</li>' +
-              '</ul>' +
-              '</div>',
-              '<strong>2025:</strong> Solli DPS ansatte meg for å hjelpe med et lignende insomniprogram, starten på min norske reise'
-            ]
-          },
-          {
-            title: "Egne erfaringer fra Vest-Norge",
-            split: true,
-            visual: '<img src="dps.png" alt="Egne erfaringer fra Vest-Norge – DPS" class="slide-img" />',
-            list: [
-              "Helsepsykologi er konsentrert og isolert i høyspesialiserte enheter som smerteklinikker",
-              "Mange pasienter kvalifiserer ikke",
-              "Dokumentert over 70 pasienter i løpet av ett års egen praksis ved DPS",
-              "DPS-er tvinges til å opprette begrensede underenheter, som for eksempel kun for insomni",
-              "Likevel forblir andre helsepsykologiske tilstander uadressert",
-              "Per i dag er privat sektor det eneste alternativet"
-            ]
-          },
-          {
-            title: "Observasjon",
-            centered: true,
-            text: "Per i dag har pasienter med helsepsykologiske tilstander under høy alvorlighetsgrad ingen egnede alternativer utenom privat sektor!<br><br>Det fantes heller ikke noe privat spesialistsenter for helsepsykologi ... <strong>før nå!</strong>"
-          }
         ]
       },
-      axon: {
-        accent: "#c084fc",
+      {
+        title: "Pasienter uten tilbud",
+        visual: '<img src="ToStoler.png" alt="Pasienter uten tilbud – To stoler" class="slide-img" />'
+      },
+      {
+        title: "Spesialisering i klinisk helsepsykologi",
+        list: [
+          "Vitenskapsbasert, helhetlig tilnærming",
+          "Fokus på kroniske tilstander og somatisk-psykiske komorbiditeter",
+          '<a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/klinisk-helsepsykologi-3" target="_blank" rel="noopener">Ny spesialisering</a>, færre enn 12 uteksaminerte spesialister i Norge',
+          'I Sverige: 18 uteksaminerte spesialister (inkludert meg)'
+        ]
+      },
+      {
+        title: "Helsepsykologi utenfor spesialiseringen",
+        list: [
+          "Noen psykologer har allerede erfaring med fagfeltet",
+          'F.eks. nærliggende spesialiseringer:' +
+          '<ul class="slide-sublist">' +
+          '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/nevropsykologi-5" target="_blank" rel="noopener">Nevropsykologi</a></li>' +
+          '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/habiliteringspsykologi-2" target="_blank" rel="noopener">Habiliteringspsykologi</a></li>' +
+          '<li><a href="https://www.psykologforeningen.no/kurs-og-utdanning/obligatorisk-program/psykoterapi" target="_blank" rel="noopener">Psykoterapi</a></li>' +
+          '</ul>',
+          'Eller psykologer med erfaring fra høyspesialiserte enheter:' +
+          '<ul class="slide-sublist">' +
+          '<li>Smerteklinikker</li>' +
+          '<li>Søvnsentre</li>' +
+          '<li>Rehabiliterings- og habiliteringssentre</li>' +
+          '</ul>'
+        ]
+      },
+      {
+        title: "Egne erfaringer fra Vest-Sverige",
+        list: [
+          "<strong>Bakgrunn:</strong> Svensk spesialisering i helsepsykologi, svensk spesialisering i AFPT psykoterapi og pågående norsk spesialisering i klinisk helsepsykologi (smerte)",
+          "<strong>2018:</strong> Som en del av min spesialistutdanning, et lite FoU-prosjekt innen helsepsykologi",
+          "<strong>2019:</strong> Tilbød skreddersydd psykologisk behandling for spesifikke somatiske komorbiditeter ved noen få lokale helsesentre",
+          '<strong>Kort tid etter:</strong> Massiv økning i:' +
+          '<ul class="slide-sublist">' +
+          '<li>Antall pasienter</li>' +
+          '<li>Bredde og variasjon i somatiske tilstander</li>' +
+          '<li>Samarbeidende sentre (over 18 helsesentre)</li>' +
+          '</ul>',
+          '<strong>Noen få år senere:</strong> Det største knutepunktet i sitt slag i Vest-Sverige, med over 20 initiativer og RCT-studier' +
+          '<div style="margin-top: 0.6rem; font-size: 1.05rem; line-height: 1.6; color: #cbd5e1;">' +
+          'Eksempler fra i år:' +
+          '<ul class="slide-sublist">' +
+          '<li><a href="https://www.jmir.org/2026/1/e86792/" target="_blank" rel="noopener">JMIR Vol28 (2026)</a>, som kombinerer fysioterapi og CBT for kronisk smerte</li>' +
+          '<li><a href="https://formative.jmir.org/2026/1/e81285" target="_blank" rel="noopener">JMIR Formative Research Vol10 (2026)</a>, om blandet CBT og ACT for insomni</li>' +
+          '<li><a href="https://gup.ub.gu.se/publication/359583" target="_blank" rel="noopener">Under publisering</a>, om blandet ACT for migrene</li>' +
+          '</ul>' +
+          '</div>',
+          '<strong>2025:</strong> Solli DPS ansatte meg for å hjelpe med et lignende insomniprogram, starten på min norske reise'
+        ]
+      },
+      {
+        title: "Egne erfaringer fra Vest-Norge",
+        split: true,
+        visual: '<img src="dps.png" alt="Egne erfaringer fra Vest-Norge – DPS" class="slide-img" />',
+        list: [
+          "Helsepsykologi er konsentrert og isolert i høyspesialiserte enheter som smerteklinikker",
+          "Mange pasienter kvalifiserer ikke",
+          "Dokumentert over 70 pasienter i løpet av ett års egen praksis ved DPS",
+          "DPS-er tvinges til å opprette begrensede underenheter, som for eksempel kun for insomni",
+          "Likevel forblir andre helsepsykologiske tilstander uadressert",
+          "Per i dag er privat sektor det eneste alternativet"
+        ]
+      },
+      {
+        title: "Observasjon",
+        centered: true,
+        text: "Per i dag har pasienter med helsepsykologiske tilstander under høy alvorlighetsgrad ingen egnede alternativer utenom privat sektor!<br><br>Det fantes heller ikke noe privat spesialistsenter for helsepsykologi ... <strong>før nå!</strong>"
+      },
+      {
+        eyebrow: "Fagdagen",
         title: "Senter for smerte og helsepsykologi",
-        pages: [
-          {
-            title: "Lignende pasientprofil hos EmmaSofia",
-            split: true,
-            visual: '<img src="ToStoler.png" alt="Lignende pasientprofil hos EmmaSofia – To stoler" class="slide-img" />',
-            list: [
-              "Har allerede prøvd både tradisjonell medisinsk og psykologisk behandling",
-              "Tilstandene er ofte kroniske og sammensatte, med fysiske symptomer",
-              "Bare ved å beskrive helsepsykologi på min EmmaSofia-profil har det vært en jevn strøm av slike pasienter",
-              "Inkludert ketaminpasienter, behandlingsresistent depresjon komorbid med somatiske utfordringer",
-              "F.eks. nylig en ketaminpasient, behandlingsresistent depresjon komorbid med migrene"
-            ]
-          },
-          {
-            title: "Helsepsykologi inn i EmmaSofias portefølje",
-            split: true,
-            visual: '<img src="ToStolerES.png" alt="Helsepsykologi inn i EmmaSofias portefølje" class="slide-img" />',
-            list: [
-              'På <a href="https://emmasofia.no/smerte-og-helsepsykologi" target="_blank" rel="noopener">hovedsiden</a> listes 12 fokusområder:' +
-              '<ul class="slide-sublist slide-sublist-compact">' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/langvarige-smerter/" target="_blank" rel="noopener">Langvarige smerter</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/utmattelse/" target="_blank" rel="noopener">Utmattelse</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/fibromyalgi/" target="_blank" rel="noopener">Fibromyalgi</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/ibs-og-vedvarende-mageplager/" target="_blank" rel="noopener">IBS og mageplager</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/migrene-og-hodepine/" target="_blank" rel="noopener">Migrene og hodepine</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/sovnvansker/" target="_blank" rel="noopener">Søvnvansker</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/helseangst/" target="_blank" rel="noopener">Helseangst</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/kvinnehelse/" target="_blank" rel="noopener">Kvinnehelse</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/utbrenthet/" target="_blank" rel="noopener">Utbrenthet</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/palliasjon/" target="_blank" rel="noopener">Palliasjon</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-fysisk-sykdom/" target="_blank" rel="noopener">Belastninger v/ fysisk sykdom</a></li>' +
-              '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-medisinske-prosedyrer/" target="_blank" rel="noopener">Belastninger v/ prosedyrer</a></li>' +
-              '</ul>',
-              'Målet er å tilby spesialiserte behandlinger per problemområde'
-            ]
-          },
-          {
-            title: "Modell",
-            intro: "To parallelle behandlingsmodeller",
-            list: [
-              "<strong>Galleri-modell:</strong> erfarne psykologer følger egen tilnærming",
-              "<strong>EBBA-modell:</strong> EvidensBasert Behandling for Alle, spesifikke protokollbaserte metoder, spesielt for psykologer som er nye på feltet"
-            ]
-          },
-          {
-            title: "Eksempel på pasientforløp",
-            intro: "La oss ta insomni som eksempel:",
-            ordered: "decimal",
-            list: [
-              '<strong>Oppstartsamtale:</strong>' +
-              '<ul class="slide-sublist">' +
-              '<li>Insomni identifiseres som et hovedproblem, og pasienten ønsker fokus på dette</li>' +
-              '<li>Ideelt sett, men ikke nødvendigvis, innebærer prosessen en biopsykososial utredning</li>' +
-              '<li>Det vil tilbys kurs i biopsykososial utredning holdt av en ekstern ekspert</li>' +
-              '<li>Det vil foreligge maler og relevante spørreskjemaer i Psykbase</li>' +
-              '</ul>',
-              '<strong>Spesialisert behandling:</strong>' +
-              '<ul class="slide-sublist">' +
-              '<li>Erfarne psykologer kan velge ulike metoder</li>' +
-              '<li>Ideelt sett, men ikke nødvendigvis, følger behandleren en protokollbasert metode som CBT-I</li>' +
-              '<li>Det vil foreligge retningslinjer for CBT-I for interesserte behandlere</li>' +
-              '<li>Det vil tilbys kurs i CBT-I eller protokollbasert behandling holdt av en ekstern ekspert</li>' +
-              '</ul>',
-              '<strong>Medisinassistert psykoterapi:</strong>' +
-              '<ul class="slide-sublist">' +
-              '<li>Dersom behandlingsresistent depresjon identifiseres som en nøkkelfaktor, tilbys KAP-forløp</li>' +
-              '</ul>'
-            ]
-          },
-          {
-            title: "Neste steg",
-            list: [
-              'Velg området du har erfaring med eller interesse for fra Notion',
-              'Delta på det ukentlige fagmøtet om helsepsykologi',
-              'Hvis du identifiserer pasienter med disse problemene, henvis til senteret',
-              'Sammen bygger vi et fagmiljø uten sidestykke i Norge:' +
-              '<ul class="slide-sublist">' +
-              '<li>Kurs med eksterne forelesere</li>' +
-              '<li>Følge, lære og videreutvikle de skreddersydde protokollene som tilbys</li>' +
-              '<li>Gjensidig auskultasjon: vi deltar på hverandres pasientsesjoner og diskuterer hvordan vi kan forbedre oss</li>' +
-              '</ul>',
-              'Nettsidene til senteret skal representere oss alle, innspill og forslag er hjertelig velkomne'
-            ]
-          }
-
+        visual: mainVenn
+      },
+      {
+        id: "senter",
+        eyebrow: "Senter for smerte og helsepsykologi",
+        title: "Lignende pasientprofil hos EmmaSofia",
+        split: true,
+        visual: '<img src="ToStoler.png" alt="Lignende pasientprofil hos EmmaSofia – To stoler" class="slide-img" />',
+        list: [
+          "Har allerede prøvd både tradisjonell medisinsk og psykologisk behandling",
+          "Tilstandene er ofte kroniske og sammensatte, med fysiske symptomer",
+          "Bare ved å beskrive helsepsykologi på min EmmaSofia-profil har det vært en jevn strøm av slike pasienter",
+          "Inkludert ketaminpasienter, behandlingsresistent depresjon komorbid med somatiske utfordringer",
+          "F.eks. nylig en ketaminpasient, behandlingsresistent depresjon komorbid med migrene"
+        ]
+      },
+      {
+        title: "Helsepsykologi inn i EmmaSofias portefølje",
+        split: true,
+        visual: '<img src="ToStolerES.png" alt="Helsepsykologi inn i EmmaSofias portefølje" class="slide-img" />',
+        list: [
+          'På <a href="https://emmasofia.no/smerte-og-helsepsykologi" target="_blank" rel="noopener">hovedsiden</a> listes 12 fokusområder:' +
+          '<ul class="slide-sublist slide-sublist-compact">' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/langvarige-smerter/" target="_blank" rel="noopener">Langvarige smerter</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/utmattelse/" target="_blank" rel="noopener">Utmattelse</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/fibromyalgi/" target="_blank" rel="noopener">Fibromyalgi</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/ibs-og-vedvarende-mageplager/" target="_blank" rel="noopener">IBS og mageplager</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/migrene-og-hodepine/" target="_blank" rel="noopener">Migrene og hodepine</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/sovnvansker/" target="_blank" rel="noopener">Søvnvansker</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/helseangst/" target="_blank" rel="noopener">Helseangst</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/kvinnehelse/" target="_blank" rel="noopener">Kvinnehelse</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/utbrenthet/" target="_blank" rel="noopener">Utbrenthet</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/palliasjon/" target="_blank" rel="noopener">Palliasjon</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-fysisk-sykdom/" target="_blank" rel="noopener">Belastninger v/ fysisk sykdom</a></li>' +
+          '<li><a href="https://emmasofia.no/smerte-og-helsepsykologi/psykiske-belastninger-ved-medisinske-prosedyrer/" target="_blank" rel="noopener">Belastninger v/ prosedyrer</a></li>' +
+          '</ul>',
+          'Målet er å tilby spesialiserte behandlinger per problemområde'
+        ]
+      },
+      {
+        title: "Modell",
+        intro: "To parallelle behandlingsmodeller",
+        list: [
+          "<strong>Galleri-modell:</strong> erfarne psykologer følger egen tilnærming",
+          "<strong>EBBA-modell:</strong> EvidensBasert Behandling for Alle, spesifikke protokollbaserte metoder, spesielt for psykologer som er nye på feltet"
+        ]
+      },
+      {
+        title: "Eksempel på pasientforløp",
+        intro: "La oss ta insomni som eksempel:",
+        ordered: "decimal",
+        list: [
+          '<strong>Oppstartsamtale:</strong>' +
+          '<ul class="slide-sublist">' +
+          '<li>Insomni identifiseres som et hovedproblem, og pasienten ønsker fokus på dette</li>' +
+          '<li>Ideelt sett, men ikke nødvendigvis, innebærer prosessen en biopsykososial utredning</li>' +
+          '<li>Det vil tilbys kurs i biopsykososial utredning holdt av en ekstern ekspert</li>' +
+          '<li>Det vil foreligge maler og relevante spørreskjemaer i Psykbase</li>' +
+          '</ul>',
+          '<strong>Spesialisert behandling:</strong>' +
+          '<ul class="slide-sublist">' +
+          '<li>Erfarne psykologer kan velge ulike metoder</li>' +
+          '<li>Ideelt sett, men ikke nødvendigvis, følger behandleren en protokollbasert metode som CBT-I</li>' +
+          '<li>Det vil foreligge retningslinjer for CBT-I for interesserte behandlere</li>' +
+          '<li>Det vil tilbys kurs i CBT-I eller protokollbasert behandling holdt av en ekstern ekspert</li>' +
+          '</ul>',
+          '<strong>Medisinassistert psykoterapi:</strong>' +
+          '<ul class="slide-sublist">' +
+          '<li>Dersom behandlingsresistent depresjon identifiseres som en nøkkelfaktor, tilbys KAP-forløp</li>' +
+          '</ul>'
+        ]
+      },
+      {
+        title: "Neste steg",
+        list: [
+          'Velg området du har erfaring med eller interesse for fra Notion',
+          'Delta på det ukentlige fagmøtet om helsepsykologi',
+          'Hvis du identifiserer pasienter med disse problemene, henvis til senteret',
+          'Sammen bygger vi et fagmiljø uten sidestykke i Norge:' +
+          '<ul class="slide-sublist">' +
+          '<li>Kurs med eksterne forelesere</li>' +
+          '<li>Følge, lære og videreutvikle de skreddersydde protokollene som tilbys</li>' +
+          '<li>Gjensidig auskultasjon: vi deltar på hverandres pasientsesjoner og diskuterer hvordan vi kan forbedre oss</li>' +
+          '</ul>',
+          'Nettsidene til senteret skal representere oss alle, innspill og forslag er hjertelig velkomne'
         ]
       }
-    };
+    ];
 
-    const stage = document.getElementById('stage');
+    // Inherit section eyebrow for slides that omit it
+    let _lastEyebrow = "";
+    slides.forEach(s => {
+      if (s.eyebrow) _lastEyebrow = s.eyebrow;
+      else s.eyebrow = _lastEyebrow;
+    });
+
     const slideEl = document.getElementById('slide');
-    const diagramWrap = document.getElementById('diagramWrap');
-    const bigSvg = diagramWrap.querySelector('svg');
-    let _activeId = null;
     let _page = 0;
     let _subslide = 0;
-    let _lastActiveId = null;
-    let _lastPage = 0;
-    let _lastSubslide = 0;
-    let _busy = false;
 
-    const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
     const duration = () =>
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 700;
-
-    function setHighlight(id, on) {
-      const group = document.getElementById('node-' + id);
-      if (!group) return;
-      // Exclude circles inside <defs> (clipPath circles)
-      const circle = [...group.querySelectorAll('circle')].find(c => !c.closest('defs'));
-      const rect = group.querySelector('rect');
-
-      if (circle) {
-        // Logo / circular node — highlight the circle border
-        if (on) {
-          circle._origStroke = circle.getAttribute('stroke');
-          circle._origStrokeWidth = circle.getAttribute('stroke-width');
-          circle.setAttribute('stroke', '#ffffff');
-          circle.setAttribute('stroke-width', '5');
-          circle.setAttribute('filter', 'url(#glow)');
-        } else {
-          circle.setAttribute('stroke', circle._origStroke || '#3b82f6');
-          circle.setAttribute('stroke-width', circle._origStrokeWidth || '2.5');
-          circle.removeAttribute('filter');
-        }
-      } else if (rect) {
-        if (group.classList.contains('logo-node')) {
-          // Capsule badge (e.g. Senter for smerte og helsepsykologi)
-          if (on) {
-            rect._origStroke = rect.getAttribute('stroke');
-            rect._origStrokeWidth = rect.getAttribute('stroke-width');
-            rect.setAttribute('stroke', '#ffffff');
-            rect.setAttribute('stroke-width', '4');
-            rect.setAttribute('filter', 'url(#glow)');
-          } else {
-            rect.setAttribute('stroke', rect._origStroke || '#c084fc');
-            rect.setAttribute('stroke-width', rect._origStrokeWidth || '2');
-            rect.removeAttribute('filter');
-          }
-        } else {
-          // Text-only title label — toggle the highlight rect
-          rect.setAttribute('opacity', on ? '1' : '0');
-        }
-      }
-    }
 
     function getSubslideCount(page) {
       if (!page) return 1;
@@ -907,12 +764,11 @@
     }
 
     function updateNav() {
-      const s = slides[_activeId];
-      if (!s) return;
-      const page = s.pages[_page];
+      const page = slides[_page];
+      if (!page) return;
       const subCount = getSubslideCount(page);
       const isFirst = (_page === 0 && _subslide === 0);
-      const isLast = (_page === s.pages.length - 1 && _subslide === subCount - 1);
+      const isLast = (_page === slides.length - 1 && _subslide === subCount - 1);
 
       const prevBtn = slideEl.querySelector('.slide-nav-prev');
       const nextBtn = slideEl.querySelector('.slide-nav-next');
@@ -923,9 +779,9 @@
 
       if (nextBtn) {
         if (isLast) {
-          nextBtn.setAttribute('onclick', 'closeSlide()');
-          nextBtn.setAttribute('aria-label', 'Tilbake til diagrammet');
-          nextBtn.setAttribute('title', 'Tilbake til diagrammet');
+          nextBtn.setAttribute('onclick', 'goToIndex(0)');
+          nextBtn.setAttribute('aria-label', 'Tilbake til starten');
+          nextBtn.setAttribute('title', 'Tilbake til starten');
           nextBtn.innerHTML = '&#8617;';
         } else {
           nextBtn.setAttribute('onclick', 'nextPage()');
@@ -968,16 +824,13 @@
       }
     }
 
-    function renderSlide(id, pageIndex, animate) {
-      const s = slides[id];
-      const page = s.pages[pageIndex];
+    function renderSlide(pageIndex, animate) {
+      const page = slides[pageIndex];
       const subCount = getSubslideCount(page);
       const isFirst = (pageIndex === 0 && _subslide === 0);
-      const isLast = (pageIndex === s.pages.length - 1 && _subslide === subCount - 1);
-      const hasSteps = (s.pages.length > 1 || subCount > 1);
+      const isLast = (pageIndex === slides.length - 1 && _subslide === subCount - 1);
 
-      // Every slide: section title on the small line, slide title as the big heading.
-      const eyebrow = `<p class="slide-eyebrow">${s.title}</p>`;
+      const eyebrow = `<p class="slide-eyebrow">${page.eyebrow}</p>`;
       const listTag = page.ordered ? 'ol' : 'ul';
       const listHtml = page.list ? `
         <${listTag} class="slide-list${page.ordered ? ' slide-list-' + page.ordered : ''}">
@@ -1009,24 +862,19 @@
           (page.after ? `<p class="slide-body slide-after">${page.after}</p>` : '');
       }
 
-      // Prev / Next buttons; last subslide of last page ends with "Return to diagram"
       const prevBtn = `<button class="slide-nav-prev" onclick="prevPage()" aria-label="Forrige lysbilde" title="Forrige lysbilde" style="visibility:${isFirst ? 'hidden' : 'visible'}">&larr;</button>`;
       const nextBtn = isLast
-        ? `<button class="slide-nav-next" onclick="closeSlide()" aria-label="Tilbake til diagrammet" title="Tilbake til diagrammet">&#8617;</button>`
+        ? `<button class="slide-nav-next" onclick="goToIndex(0)" aria-label="Tilbake til starten" title="Tilbake til starten">&#8617;</button>`
         : `<button class="slide-nav-next" onclick="nextPage()" aria-label="Neste lysbilde" title="Neste lysbilde">&rarr;</button>`;
-      const nav = hasSteps ? `
+      const nav = `
           <footer class="slide-nav">
             ${prevBtn}
-            ${nextBtn}
-          </footer>` : `
-          <footer class="slide-nav slide-nav-end">
             ${nextBtn}
           </footer>`;
 
       slideEl.innerHTML = `
-        <article class="slide-card" style="--accent:${s.accent}">
+        <article class="slide-card" style="--accent:${page.accent || '#c084fc'}">
           <header class="slide-head">
-            <button class="slide-icon" onclick="closeSlide()" aria-label="Tilbake til diagrammet" title="Tilbake til diagrammet">${iconHtml(id)}</button>
             <div>
               ${eyebrow}
               <h2 class="slide-title">${page.title}</h2>
@@ -1052,159 +900,20 @@
       }
     }
 
-    /* Transform that maps a region of the big diagram onto the small icon */
-    function shrinkTransform(region) {
-      const iconEl = slideEl.querySelector('.slide-icon svg');
-      const r = bigSvg.getBoundingClientRect();
-      const wr = diagramWrap.getBoundingClientRect();
-      const viewBox = bigSvg.viewBox.baseVal;
-      const sx = r.width / viewBox.width, sy = r.height / viewBox.height;
-      const regionW = region.w * sx;
-      const regionH = region.h * sy;
-      const cx = r.left + (region.x - viewBox.x + region.w / 2) * sx;
-      const cy = r.top + (region.y - viewBox.y + region.h / 2) * sy;
-      const ir = iconEl.getBoundingClientRect();
-      const icx = ir.left + ir.width / 2;
-      const icy = ir.top + ir.height / 2;
-      // Icon preserves aspect ratio, so its scale is limited by the smaller side
-      const scale = Math.min(ir.width / regionW, ir.height / regionH);
-      return {
-        origin: `${cx - wr.left}px ${cy - wr.top}px`,
-        transform: `translate(${icx - cx}px, ${icy - cy}px) scale(${scale})`
-      };
-    }
-
-    /* Everything in the diagram that should fade away so only the related part remains.
-       Main circles: all except the chosen circle. Logo / intersection nodes: everything
-       (a separate copy of just their region, the "proxy", takes over and shrinks into the icon). */
-    function otherParts(id) {
-      const kids = [...bigSvg.children].filter(el =>
-        el.tagName.toLowerCase() !== 'defs' && !el.classList.contains('region-proxy'));
-      const c = CIRCLES[id];
-      if (c) {
-        const keep = [...bigSvg.querySelectorAll(':scope > circle')][c.idx];
-        return kids.filter(el => el !== keep);
-      }
-      return kids;
-    }
-
-    // For logo / intersection nodes: a copy of just their region, drawn on top of the diagram
-    function addProxy(id, keyframes, ms) {
-      if (!REGIONS[id]) return null;
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute('class', 'region-proxy');
-      g.setAttribute('pointer-events', 'none');
-      g.innerHTML = regionContent(id, 'px');
-      bigSvg.appendChild(g);
-      g.animate(keyframes, { duration: ms, easing: 'linear', fill: 'forwards' });
-      return g;
-    }
-
-    function showInfo(id, page = 0, subslide = 0) {
-      if (_busy || _activeId) return;
-      _busy = true;
-      _activeId = id;
-      _page = page;
-      _subslide = subslide;
-      setHighlight(id, true);
-      renderSlide(id, _page, false);
-      stage.classList.add('has-slide');
-
-      const t = shrinkTransform(regionFor(id));
-      diagramWrap.style.pointerEvents = 'none';
-      diagramWrap.style.transformOrigin = t.origin;
-
-      // The other two circles (and all labels / logos) fade away early
-      const fades = otherParts(id).map(el =>
-        el.animate([{ opacity: 1 }, { opacity: 0 }],
-          { duration: duration() * 0.4, easing: 'ease-out', fill: 'forwards' })
-      );
-
-      const proxy = addProxy(id, [{ opacity: 0 }, { opacity: 1 }], duration() * 0.4);
-
-      // Diagram shrinks into the icon position, then fades out as the icon fades in
-      const anim = diagramWrap.animate(
-        [
-          { transform: 'none', opacity: 1 },
-          { opacity: 1, offset: 0.55 },
-          { transform: t.transform, opacity: 0 }
-        ],
-        { duration: duration(), easing: EASE, fill: 'forwards' }
-      );
-      const icon = slideEl.querySelector('.slide-icon');
-      if (icon && duration()) {
-        icon.animate([{ opacity: 0 }, { opacity: 1 }],
-          { duration: duration() * 0.45, delay: duration() * 0.45, easing: 'ease-out', fill: 'backwards' });
-      }
-      anim.onfinish = () => {
-        diagramWrap.classList.add('diagram-hidden');
-        anim.cancel();
-        fades.forEach(a => a.cancel());
-        if (proxy) proxy.remove();
-        diagramWrap.style.pointerEvents = '';
-        diagramWrap.style.transformOrigin = '';
-        _busy = false;
-      };
-    }
-
-    function closeSlide() {
-      if (_busy || !_activeId) return;
-      _busy = true;
-      const id = _activeId;
-      _lastActiveId = _activeId;
-      _lastPage = _page;
-      _lastSubslide = _subslide;
-      const t = shrinkTransform(regionFor(id));   // measure while the slide is still there
-      setHighlight(id, false);
-      _activeId = null;
-      _page = 0;
+    function goToIndex(index) {
+      if (index < 0 || index >= slides.length) return;
+      _page = index;
       _subslide = 0;
-
-      diagramWrap.classList.remove('diagram-hidden');
-      diagramWrap.style.pointerEvents = 'none';
-      diagramWrap.style.transformOrigin = t.origin;
-      stage.classList.remove('has-slide');   // slide fades out (its content stays until faded)
-
-      // The other two circles (and labels / logos) fade back in during the second half
-      otherParts(id).forEach(el =>
-        el.animate([{ opacity: 0 }, { opacity: 0, offset: 0.5 }, { opacity: 1 }],
-          { duration: duration(), easing: 'linear' })
-      );
-
-      const proxy = addProxy(id, [{ opacity: 1 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], duration());
-
-      // Icon grows back into the full diagram
-      const anim = diagramWrap.animate(
-        [
-          { transform: t.transform, opacity: 0 },
-          { opacity: 1, offset: 0.45 },
-          { transform: 'none', opacity: 1 }
-        ],
-        { duration: duration(), easing: EASE }
-      );
-      anim.onfinish = () => {
-        if (proxy) proxy.remove();
-        diagramWrap.style.pointerEvents = '';
-        diagramWrap.style.transformOrigin = '';
-        _busy = false;
-      };
+      renderSlide(_page, true);
     }
 
-    // Jump straight to a page of another topic (used by the (#1) / (#2) links)
-    function jumpTo(id, page) {
-      if (_busy || !_activeId || !slides[id]) return;
-      setHighlight(_activeId, false);
-      _activeId = id;
-      _page = page || 0;
-      _subslide = 0;
-      setHighlight(id, true);
-      renderSlide(id, _page, true);
+    function goToId(id) {
+      const idx = slides.findIndex(s => s.id === id);
+      if (idx !== -1) goToIndex(idx);
     }
 
     function nextPage() {
-      if (!_activeId || _busy) return;
-      const s = slides[_activeId];
-      const page = s.pages[_page];
+      const page = slides[_page];
       const subCount = getSubslideCount(page);
 
       if (_subslide < subCount - 1) {
@@ -1214,17 +923,16 @@
         return;
       }
 
-      if (_page < s.pages.length - 1) {
+      if (_page < slides.length - 1) {
         _page++;
         _subslide = 0;
-        renderSlide(_activeId, _page, true);
+        renderSlide(_page, true);
+      } else {
+        goToIndex(0);
       }
     }
 
     function prevPage() {
-      if (!_activeId || _busy) return;
-      const s = slides[_activeId];
-
       if (_subslide > 0) {
         hideSubslide(_subslide);
         _subslide--;
@@ -1234,47 +942,25 @@
 
       if (_page > 0) {
         _page--;
-        const prevPageObj = s.pages[_page];
+        const prevPageObj = slides[_page];
         _subslide = getSubslideCount(prevPageObj) - 1;
-        renderSlide(_activeId, _page, true);
+        renderSlide(_page, true);
       }
     }
 
-    // Keyboard: Esc closes, → / Space / PageDown advances subslide/page, ← / PageUp goes back
+    // Keyboard: → / Space / PageDown advances subslide/page, ← / PageUp goes back
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeSlide();
-      } else if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-        if (_busy) return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
         if (e.key === ' ' && (e.target.tagName === 'BUTTON' || e.target.tagName === 'A')) return;
-        if (!_activeId) {
-          e.preventDefault();
-          showInfo('circle_health');
-          return;
-        }
         e.preventDefault();
-        const s = slides[_activeId];
-        const page = s.pages[_page];
-        const subCount = getSubslideCount(page);
-        const isLast = (_page === s.pages.length - 1 && _subslide === subCount - 1);
-        if (isLast) {
-          closeSlide();
-        } else {
-          nextPage();
-        }
+        nextPage();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        if (_busy) return;
-        if (!_activeId) {
-          if (_lastActiveId && slides[_lastActiveId]) {
-            e.preventDefault();
-            showInfo(_lastActiveId, _lastPage, _lastSubslide);
-          }
-          return;
-        }
         e.preventDefault();
         prevPage();
       }
     });
+
+    renderSlide(0, false);
   </script>
 </body>
 
